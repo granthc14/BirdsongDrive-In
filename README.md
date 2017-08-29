@@ -26,11 +26,21 @@ install Webstorm from https://www.jetbrains.com/webstorm/ after making a free st
 
 clone the repository in Webstorm and you should be good to go
 
+
+node packages left to install run these commands in the BirdsongDrive-in folder
+
+npm install react-basic --save
+npm install react-native-android-tablayout --save
+npm install react-native-vector-icons --save
+
+
 Helpful videos:
 
 https://www.youtube.com/watch?v=mkualZPRZCs
 
 https://www.youtube.com/watch?v=A71aqufiNtQ
+
+https://docs.nativebase.io/
 
 
 

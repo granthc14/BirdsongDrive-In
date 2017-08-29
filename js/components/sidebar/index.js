@@ -60,7 +60,7 @@ class SideBar extends Component {
 		return (
 			<Container>
 				<Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
-					<Text> Menu </Text>
+					<Text></Text>
 					<List
 						dataArray={datas}
 						renderRow={data =>
