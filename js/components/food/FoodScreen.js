@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     Container,
     Header,
@@ -8,25 +9,27 @@ import {
     Text,
     H3,
     Button,
-    Icon,
     Footer,
     FooterTab,
     Left,
     Right,
-    Body
+    Body,
+    Tab,
+    TabHeading,
+    Tabs
 } from "native-base";
 export default class FoodScreen extends Component {
     render() {
 
         return (
             <Container style={styles.container}>
-                <Header>
+                <Header
+                    hasTabs>
                     <Left>
                         <Button
                             transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
-                        >
-                            <Icon name="ios-menu" />
+                            onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+                            <Icon name="menu" size={25}/>
                         </Button>
                     </Left>
                     <Body>
@@ -35,12 +38,16 @@ export default class FoodScreen extends Component {
                     <Right />
 
                 </Header>
+                <Tabs>
+                    <Tab heading={ <TabHeading><Icon name="food" size={25}/><Text>Food</Text></TabHeading>}>
+                    </Tab>
+                    <Tab heading={ <TabHeading><Icon name="water" size={25} /><Text>Drink</Text></TabHeading>}>
+                    </Tab>
+                    <Tab heading={ <TabHeading><Icon name="popcorn" size={25}/><Text>Popcorn</Text></TabHeading>}>
+                    </Tab>
 
+                </Tabs>
                 <Content padder>
-                    <Text>
-                        This is the food screen
-                    </Text>
-
                 </Content>
             </Container>
         );

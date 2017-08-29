@@ -71,7 +71,8 @@ export default class NowPlayingScreen extends Component {
                         }><Text>Screen 1</Text></Button>
                     <Button last
                             active={this.state.screen === 2}
-                            onPress={() => this.setState({screen:2, screenOneMovie: this.movies.screenOne.movieTwo, screenTwoMovie:this.movies.screenTwo.movieTwo})}><Text>Screen 2</Text></Button>
+                            onPress={() => this.setState({screen:2, screenOneMovie: this.movies.screenOne.movieTwo, screenTwoMovie:this.movies.screenTwo.movieTwo})
+                        }><Text>Screen 2</Text></Button>
                 </Segment>
 
                 <Content padder>
