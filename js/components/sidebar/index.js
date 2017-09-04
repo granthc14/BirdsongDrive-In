@@ -30,7 +30,7 @@ const datas = [
 	{
 		name: "Food",
 		route: "Food",
-        icon: "food",
+        icon: "phone-portrait",
 		bg: "#C5F442",
 	},
 	{
