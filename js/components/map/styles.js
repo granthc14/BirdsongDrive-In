@@ -5,5 +5,8 @@ const { StyleSheet } = React;
 export default {
   container: {
     backgroundColor: "#fff"
-  }
+  },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+    },
 };

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
-
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
 	Content,
 	Text,
 	List,
 	ListItem,
-	Icon,
 	Container,
 	Left,
 	Right,
@@ -24,25 +23,25 @@ const datas = [
 	{
 		name: "Now Playing",
 		route: "NowPlaying",
-		icon: "phone-portrait",
+		icon: "movie",
 		bg: "#C5F442",
 	},
 	{
 		name: "Food",
 		route: "Food",
-        icon: "phone-portrait",
+        icon: "food-apple",
 		bg: "#C5F442",
 	},
 	{
 		name: "Info",
 		route: "Info",
-		icon: "phone-portrait",
+		icon: "information",
 		bg: "#477EEA",
 	},
 	{
 		name: "Map",
 		route: "Map",
-		icon: "phone-portrait",
+		icon: "map-marker",
 		bg: "#DA4437",
 	},
 ];
@@ -66,7 +65,7 @@ class SideBar extends Component {
 						renderRow={data =>
 							<ListItem button noBorder onPress={() => this.props.navigation.navigate(data.route)}>
 								<Left>
-									<Icon active name={data.icon} style={{ color: "#777", fontSize: 26, width: 30 }} />
+                                    <Icon name={data.icon} size={25}/>
 									<Text style={styles.text}>
 										{data.name}
 									</Text>
