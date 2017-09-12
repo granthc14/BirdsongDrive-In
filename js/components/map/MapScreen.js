@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from "./styles";
 import {View} from 'react-native';
 import {
+    ActionSheet,
     Container,
     Header,
     Title,
@@ -16,6 +17,14 @@ import {
     Right,
     Body
 } from "native-base";
+
+let ACTIONS = [
+    {text: "Use my location"},
+    {text: "Use new location"},
+    {text: "Cancel", color: "ff0000"}
+
+];
+let CANCEL_INDEX = 2;
 import MapView from 'react-native-maps';
 
 export default class MapScreen extends Component {
@@ -28,7 +37,7 @@ export default class MapScreen extends Component {
                 {
                     title: "Birdsong Drive-In",
                     description: "Birdsong Drive-In",
-                    pinColor:"#7d1f6f",
+                    pinColor:"#ff0000",
                     coordinate:{
                         latitude:35.9813048,
                         longitude:-88.0802684
@@ -53,7 +62,23 @@ export default class MapScreen extends Component {
                     <Body>
                     <Title>Map</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Button
+                            transparent
+                            onPress={() =>
+                                ActionSheet.show(
+                                    {
+                                        options: ACTIONS,
+                                        cancelButtonIndex: CANCEL_INDEX,
+                                        title: "Directions"
+                                    },
+                                    buttonIndex => {
+                                        this.setState({ clicked: ACTIONS[buttonIndex] });
+                                    }
+                                )}>
+                            <Text>Directions</Text>
+                        </Button>
+                    </Right>
                 </Header>
                 <Container>
                     <MapView

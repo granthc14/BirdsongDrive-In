@@ -56,7 +56,8 @@ export default class FoodScreen extends Component {
                 combo: {name: "Combo Deal (1 Large Popcorn and 2 Large Drinks)", price: 12.00, amount: 0},
             },
             total: [],
-            totalAmount: 0
+            totalAmount: 0,
+            shoppingCartColor: 'grey'
         }
         this.totalHandler = this.addTotal.bind(this);
     }
@@ -80,7 +81,7 @@ export default class FoodScreen extends Component {
             total = total + newTotal[i].itemTotal;
         }
 
-        this.setState({total: newTotal, totalAmount: total});
+        this.setState({total: newTotal, totalAmount: total, shoppingCartColor:'#32cd32'});
     }
 
     render() {
@@ -148,6 +149,11 @@ export default class FoodScreen extends Component {
                     <Left>
                         <Text>Total: ${this.state.totalAmount}</Text>
                     </Left>
+                    <Right>
+                        <Button transparent>
+                            <Icon name="cart-outline" size={25} style={{color: this.state.shoppingCartColor}}/>
+                        </Button>
+                    </Right>
                 </Footer>
             </Container>
         );

@@ -34,7 +34,7 @@ export default class FoodListItem extends Component {
         return (
             <ListItem>
                 <Left>
-                    <Text>{this.state.item.name} amount: {this.state.item.amount}</Text>
+                    <Text>{this.state.item.name}</Text>
                 </Left>
                 <Body>
                     <Text>${this.state.item.price}</Text>

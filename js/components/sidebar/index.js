@@ -33,12 +33,6 @@ const datas = [
 		bg: "#C5F442",
 	},
 	{
-		name: "Info",
-		route: "Info",
-		icon: "information",
-		bg: "#477EEA",
-	},
-	{
 		name: "Map",
 		route: "Map",
 		icon: "map-marker",
