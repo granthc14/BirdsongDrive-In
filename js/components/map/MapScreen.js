@@ -18,12 +18,7 @@ import {
     Body
 } from "native-base";
 
-let ACTIONS = [
-    {text: "Use my location"},
-    {text: "Use new location"},
-    {text: "Cancel", color: "ff0000"}
-
-];
+let ACTIONS = ["Use my location", "Use new location", "Cancel"];
 let CANCEL_INDEX = 2;
 import MapView from 'react-native-maps';
 
@@ -86,8 +81,8 @@ export default class MapScreen extends Component {
                         initialRegion={{
                             latitude: 35.9813048,
                             longitude: -88.0802684,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,}}>
+                            latitudeDelta: 0.001,
+                            longitudeDelta: 0.001,}}>
                         {this.state.markers.map(marker => (
                             <MapView.Marker
                                 key={marker.identifier}

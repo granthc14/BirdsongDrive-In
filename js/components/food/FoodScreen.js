@@ -41,51 +41,57 @@ export default class FoodScreen extends Component {
                 dots: {name: "Dippin' Dots", price: 3.50, amount: 0}
             },
             drink:{
-                small: {name: "Small", price: 2.00, amount: 0},
-                medium: {name: "Medium", price: 3.00, amount: 0},
-                large: {name: "Large", price: 4.00, amount: 0},
+                small: {name: "Small Drink", price: 2.00, amount: 0},
+                medium: {name: "Medium Drink", price: 3.00, amount: 0},
+                large: {name: "Large Drink", price: 4.00, amount: 0},
                 dasani: {name: "Dasani Bottled Water", price: 2.00, amount: 0},
                 yoohoo: {name: "Yoo-Hoo", price: 2.00, amount: 0},
                 monster: {name: "Monster Energy Drink", price: 3.00, amount: 0},
             },
             popcorn:{
-                small: {name: "Small", price: 3.00, amount: 0},
-                medium: {name: "Medium", price: 4.00, amount: 0},
-                large: {name: "Large", price: 5.00, amount: 0},
+                small: {name: "Small Popcorn", price: 3.00, amount: 0},
+                medium: {name: "Medium Popcorn", price: 4.00, amount: 0},
+                large: {name: "Large Popcorn", price: 5.00, amount: 0},
                 jumbo: {name: "Jumbo Collectors Bucket", price: 7.00, amount: 0},
                 combo: {name: "Combo Deal (1 Large Popcorn and 2 Large Drinks)", price: 12.00, amount: 0},
             },
-            total: [],
+            order: [],
             totalAmount: 0,
-            shoppingCartColor: 'grey'
+            shoppingCartColor: 'black'
         }
         this.totalHandler = this.addTotal.bind(this);
     }
 
     addTotal(value) {
         let i;
-        let newTotal = this.state.total;
-        for (i = 0; i < newTotal.length; i++)
-        {
-            if (newTotal[i].name === value.name)
-            {
-                newTotal.splice(i, 1);
+        let newOrder = this.state.order;
+        for (i = 0; i < newOrder.length; i++) {
+            if (newOrder[i].name === value.name) {
+                newOrder.splice(i, 1);
             }
         }
-        newTotal.push({name: value.name, amount: value.amount, itemTotal: value.amount * value.price});
-
-
-        let total = 0;
-        for (i = 0; i < newTotal.length; i++)
-        {
-            total = total + newTotal[i].itemTotal;
+        if (parseInt(value.amount) > 0) {
+            newOrder.push({
+                name: value.name,
+                price: value.price,
+                amount: value.amount,
+                itemTotal: value.amount * value.price
+            });
         }
-
-        this.setState({total: newTotal, totalAmount: total, shoppingCartColor:'#32cd32'});
+        let total = 0;
+        for (i = 0; i < newOrder.length; i++) {
+            total = total + newOrder[i].itemTotal;
+        }
+        if (total > 0) {
+            this.setState({order: newOrder, totalAmount: total, shoppingCartColor: '#32cd32'});
+        } else {
+            this.setState({order: newOrder, totalAmount: total, shoppingCartColor: 'black'});
+        }
     }
 
     render() {
 
+        const {navigate} = this.props.navigation;
         return (
             <Container style={styles.container}>
                 <Header
@@ -150,7 +156,8 @@ export default class FoodScreen extends Component {
                         <Text>Total: ${this.state.totalAmount}</Text>
                     </Left>
                     <Right>
-                        <Button transparent>
+                        <Button transparent
+                        onPress={() => navigate("ShoppingCart", {order: this.state.order, totalAmount: this.state.totalAmount})}>
                             <Icon name="cart-outline" size={25} style={{color: this.state.shoppingCartColor}}/>
                         </Button>
                     </Right>

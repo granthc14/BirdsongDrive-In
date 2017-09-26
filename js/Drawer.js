@@ -7,12 +7,16 @@ import SideBar from "./components/sidebar";
 import NowPlayingScreen from "./components/nowplaying/NowPlayingScreen";
 import FoodScreen from "./components/food/FoodScreen";
 import MapScreen from "./components/map/MapScreen";
+import ShoppingCart from "./components/food/ShoppingCart";
+import CreditCardScreen from "./components/food/CheckoutScreen";
 
 const DrawerExample = DrawerNavigator(
   {
     NowPlaying: { screen: NowPlayingScreen },
     Food: { screen: FoodScreen },
     Map: { screen: MapScreen },
+    ShoppingCart: {screen: ShoppingCart},
+      CheckoutScreen: {screen: CreditCardScreen}
   },
   {
     initialRouteName: "Food",

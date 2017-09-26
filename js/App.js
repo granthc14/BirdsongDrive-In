@@ -18,6 +18,7 @@ const AppNavigator = StackNavigator(
     }
 );
 
+console.disableYellowBox = true;
 export default () =>
     <Root>
         <AppNavigator />

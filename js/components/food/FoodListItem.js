@@ -25,7 +25,6 @@ export default class FoodListItem extends Component {
         super(props);
         this.state = {
             item: this.props.item,
-            oldAmount: 0
         }
     }
 
@@ -41,7 +40,10 @@ export default class FoodListItem extends Component {
                 </Body>
                 <Right>
                     <Item regular>
-                        <Input placeholder={this.props.item.amount.toString()}
+                        <Input
+                        keyboardType="numeric"
+                        maxLength={2}
+                        placeholder={this.props.item.amount.toString()}
                         onChangeText={(value) =>
                         {
                             if (value === "")
