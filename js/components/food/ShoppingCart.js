@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     Picker,
     Container,
@@ -9,7 +10,6 @@ import {
     Text,
     Form,
     Button,
-    Icon,
     Footer,
     FooterTab,
     Left,
@@ -64,12 +64,19 @@ export default class ShoppingCart extends Component {
                     <Header>
                         <Left>
                             <Button transparent onPress={() => this.props.navigation.goBack()}>
-                                <Icon name="arrow-back" />
+                                <Icon name="arrow-left" size={25} style={{color:'white'}} />
                             </Button>
                         </Left>
                         <Body>
                         <Title>Your Order</Title>
                         </Body>
+                        <Right>
+                            <Button
+                                transparent
+                                onPress={()=> this.props.navigation.navigate("Settings")}>
+                                <Icon name="settings" style={{color: 'white'}} size={25}/>
+                            </Button>
+                        </Right>
                     </Header>
                 <Container>
                     <Content>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./styles";
 import {View} from 'react-native';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     ActionSheet,
     Container,
@@ -10,7 +11,6 @@ import {
     Text,
     H3,
     Button,
-    Icon,
     Footer,
     FooterTab,
     Left,
@@ -51,7 +51,7 @@ export default class MapScreen extends Component {
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                            <Icon name="ios-menu" />
+                            <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Left>
                     <Body>
@@ -71,7 +71,13 @@ export default class MapScreen extends Component {
                                         this.setState({ clicked: ACTIONS[buttonIndex] });
                                     }
                                 )}>
-                            <Text>Directions</Text>
+                            <Icon name="google-maps" style={{color: 'white'}} size={25}/>
+                        </Button>
+
+                        <Button
+                            transparent
+                            onPress={()=> this.props.navigation.navigate("Settings")}>
+                            <Icon name="settings" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Right>
                 </Header>

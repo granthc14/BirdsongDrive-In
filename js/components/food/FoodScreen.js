@@ -100,13 +100,19 @@ export default class FoodScreen extends Component {
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                            <Icon name="menu" size={25}/>
+                            <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Left>
                     <Body>
                     <Title>Food</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Button
+                            transparent
+                            onPress={()=> this.props.navigation.navigate("Settings")}>
+                            <Icon name="settings" style={{color: 'white'}} size={25}/>
+                        </Button>
+                    </Right>
 
                 </Header>
                 <Tabs>
@@ -153,12 +159,18 @@ export default class FoodScreen extends Component {
                 </Tabs>
                 <Footer>
                     <Left>
-                        <Text>Total: ${this.state.totalAmount}</Text>
+                        <Text style={{marginLeft: 10, fontSize: 25}}>Total: ${this.state.totalAmount}</Text>
                     </Left>
                     <Right>
                         <Button transparent
-                        onPress={() => navigate("ShoppingCart", {order: this.state.order, totalAmount: this.state.totalAmount})}>
-                            <Icon name="cart-outline" size={25} style={{color: this.state.shoppingCartColor}}/>
+                        onPress={() =>
+                        {
+                            if (this.state.totalAmount > 0)
+                            {
+                                navigate("ShoppingCart", {order: this.state.order, totalAmount: this.state.totalAmount})}
+                            }
+                        }>
+                            <Icon name="cart-outline" size={25} style={{color: this.state.shoppingCartColor, marginRight: 20}}/>
                         </Button>
                     </Right>
                 </Footer>

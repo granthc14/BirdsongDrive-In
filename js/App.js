@@ -6,14 +6,14 @@ import { Platform } from "react-native";
 import { Root } from "native-base";
 import { StackNavigator } from "react-navigation";
 
-import Drawer from "./Drawer";
+import Screens from "./Screens";
 
 const AppNavigator = StackNavigator(
     {
-        Drawer: { screen: Drawer },
+        Screens: { screen: Screens },
     },
     {
-        initialRouteName: "Drawer",
+        initialRouteName: "Screens",
         headerMode: "none",
     }
 );

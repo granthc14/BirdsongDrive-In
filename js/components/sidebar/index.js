@@ -39,7 +39,7 @@ const datas = [
 		bg: "#DA4437",
 	},
 ];
-
+const ad = require('../../images/StarbucksAd.jpg');
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
@@ -66,6 +66,12 @@ class SideBar extends Component {
 								</Left>
 							</ListItem>}
 					/>
+					<Image style={{
+                        resizeMode: "cover",
+                        width: 310,
+                        height: 450,
+                        flex: 1
+                    }} source={ad}/>
 				</Content>
 			</Container>
 		);

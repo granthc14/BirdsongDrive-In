@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./styles";
 import { Image, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     Container,
     Header,
@@ -9,7 +10,6 @@ import {
     Text,
     H3,
     Button,
-    Icon,
     Footer,
     FooterTab,
     Left,
@@ -29,10 +29,10 @@ export default class NowPlayingScreen extends Component {
     constructor(props) {
         super(props);
         this.movies = {
-          screenOne: { movieOne: {name: "Nut Job", rating: "PG", image: img1},
-                        movieTwo: {name: "Dunkirk", rating:"R", image: img2}},
-            screenTwo: {movieOne: {name: "Baby Driver", rating: "R", image: img3},
-                        movieTwo: {name: "Dark Tower", rating:"PG-13", image: img4}}
+          screenOne: { movieOne: {name: "Nut Job", rating: "PG", time:"7:00 PM",  image: img1},
+                        movieTwo: {name: "Dunkirk", rating:"R", time:"9:00 PM", image: img2}},
+            screenTwo: {movieOne: {name: "Baby Driver", rating: "R", time:"7:00 PM", image: img3},
+                        movieTwo: {name: "Dark Tower", rating:"PG-13", time:"9:00 PM", image: img4}}
         };
 
         this.state = {
@@ -54,13 +54,19 @@ export default class NowPlayingScreen extends Component {
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-                            <Icon name="ios-menu" />
+                            <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Left>
                     <Body>
                     <Title>Now Playing</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Button
+                            transparent
+                            onPress={()=> this.props.navigation.navigate("Settings")}>
+                            <Icon name="settings" style={{color: 'white'}} size={25}/>
+                        </Button>
+                    </Right>
                 </Header>
                 <Segment>
                     <Button
@@ -81,7 +87,7 @@ export default class NowPlayingScreen extends Component {
                             <Left>
                                 <Body>
                                 <Text>{this.state.screenOneMovie.name}</Text>
-                                <Text note>{this.state.screenOneMovie.rating}</Text>
+                                <Text note>{this.state.screenOneMovie.rating} {this.state.screenOneMovie.time}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
@@ -100,7 +106,7 @@ export default class NowPlayingScreen extends Component {
                             <Left>
                                 <Body>
                                 <Text>{this.state.screenTwoMovie.name}</Text>
-                                <Text note>{this.state.screenTwoMovie.rating}</Text>
+                                <Text note>{this.state.screenTwoMovie.rating} {this.state.screenTwoMovie.time}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
