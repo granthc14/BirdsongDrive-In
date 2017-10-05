@@ -29,7 +29,6 @@ export default class FoodListItem extends Component {
     }
 
     render() {
-
         return (
             <ListItem>
                 <Left>
