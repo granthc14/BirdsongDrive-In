@@ -20,6 +20,7 @@ import {
     List,
 } from "native-base";
 import FoodListItem from "./FoodListItem";
+import DrinkItem from "./DrinkItem";
 export default class FoodScreen extends Component {
     constructor(props) {
         super(props);
@@ -137,23 +138,27 @@ export default class FoodScreen extends Component {
                         </Content>
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="water" size={25} /><Text>Drink</Text></TabHeading>}>
-                        <List>
-                            <FoodListItem item={this.state.drink.small} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.drink.medium} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.drink.large} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.drink.dasani} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.drink.yoohoo} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.drink.monster} handler = {this.totalHandler}/>
-                        </List>
+                        <Content>
+                            <List>
+                                <DrinkItem item={this.state.drink.small} handler = {this.totalHandler} size = "Small"/>
+                                <DrinkItem item={this.state.drink.medium} handler = {this.totalHandler} size = "Medium"/>
+                                <DrinkItem item={this.state.drink.large} handler = {this.totalHandler} size = "Large"/>
+                                <FoodListItem item={this.state.drink.dasani} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.drink.yoohoo} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.drink.monster} handler = {this.totalHandler}/>
+                            </List>
+                        </Content>
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="popcorn" size={25}/><Text>Popcorn</Text></TabHeading>}>
-                        <List>
-                            <FoodListItem item={this.state.popcorn.small} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.popcorn.medium} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.popcorn.large} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.popcorn.jumbo} handler = {this.totalHandler}/>
-                            <FoodListItem item={this.state.popcorn.combo} handler = {this.totalHandler}/>
-                        </List>
+                        <Content>
+                            <List>
+                                <FoodListItem item={this.state.popcorn.small} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.popcorn.medium} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.popcorn.large} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.popcorn.jumbo} handler = {this.totalHandler}/>
+                                <FoodListItem item={this.state.popcorn.combo} handler = {this.totalHandler}/>
+                            </List>
+                        </Content>
                     </Tab>
 
                 </Tabs>

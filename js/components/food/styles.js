@@ -34,5 +34,19 @@ export default {
         fontSize: 200,
         textAlignVertical: "center",
         textAlign: "center"
+    },
+    drinksLeft: {
+      flexDirection: 'column',
+        flex: 1,
+        marginLeft: 10,
+        marginTop: 16
+    }, drinkNames: {
+      marginTop:10
+    },drinksBody: {
+        flexDirection: 'column',
+        flex: 1
+    }, drinksRight: {
+        flexDirection: 'column',
+        flex: 1
     }
 };
