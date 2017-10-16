@@ -18,11 +18,17 @@ import {
     ListItem,
     List,
     Item,
-    Input
+    Input,
+    Label
 } from "native-base";
 
 
 export default class ShoppingCart extends Component {
+
+    errorColor = "#ff0700";
+    successColor = "#0DD936";
+    errorIcon = "alert-circle";
+    successIcon = "check-circle";
 
     constructor(props)
     {
@@ -31,7 +37,23 @@ export default class ShoppingCart extends Component {
             paymentMethod: 'card',
             make:'',
             model:'',
-            color:''
+            color:'',
+            notes:'',
+            makeValidation: {
+                valid: false,
+                validIcon: this.errorIcon,
+                validIconColor: this.errorColor
+            },
+            modelValidation: {
+                valid: false,
+                validIcon: this.errorIcon,
+                validIconColor: this.errorColor
+            },
+            colorValidation: {
+                valid: false,
+                validIcon: this.errorIcon,
+                validIconColor: this.errorColor
+            },
         }
     }
 
@@ -41,18 +63,72 @@ export default class ShoppingCart extends Component {
         });
     }
     onMakeValueChange(value: string) {
-        this.setState({
-            make:value
-        });
+        if (value === "") {
+            this.setState({
+                make:value,
+                makeValidation: {
+                    valid: false,
+                    validIcon: this.errorIcon,
+                    validIconColor: this.errorColor
+                }
+            });
+        } else {
+            this.setState({
+                make: value,
+                makeValidation: {
+                    valid: true,
+                    validIcon: this.successIcon,
+                    validIconColor: this.successColor
+                }
+            });
+        }
     }
     onModelValueChange(value: string) {
-        this.setState({
-            model:value
-        });
+        if (value === "") {
+            this.setState({
+                model:value,
+                modelValidation: {
+                    valid: false,
+                    validIcon: this.errorIcon,
+                    validIconColor: this.errorColor
+                }
+            });
+        } else {
+            this.setState({
+                model: value,
+                modelValidation: {
+                    valid: true,
+                    validIcon: this.successIcon,
+                    validIconColor: this.successColor
+                }
+            });
+        }
     }
     onColorValueChange(value: string) {
+        if (value === "") {
+            this.setState({
+                color:value,
+                colorValidation: {
+                    valid: false,
+                    validIcon: this.errorIcon,
+                    validIconColor: this.errorColor
+                }
+            });
+        } else {
+            this.setState({
+                color: value,
+                colorValidation: {
+                    valid: true,
+                    validIcon: this.successIcon,
+                    validIconColor: this.successColor
+                }
+            });
+        }
+    }
+
+    onNotesValueChange(value: string) {
         this.setState({
-            color:value
+            notes: value
         });
     }
 
@@ -85,11 +161,10 @@ export default class ShoppingCart extends Component {
                             renderRow={orderItem =>
                                 <ListItem>
                                     <Left>
+                                        <Text>#{orderItem.amount}</Text>
                                         <Text>{orderItem.name}</Text>
                                     </Left>
                                     <Body style={styles.itemTotal}>
-                                        <Text>${orderItem.price}</Text>
-                                        <Text>#{orderItem.amount}</Text>
                                         <Text>${orderItem.itemTotal}</Text>
                                     </Body>
                                 </ListItem>}
@@ -106,23 +181,37 @@ export default class ShoppingCart extends Component {
                                     <Item label="Cash" value="cash"/>
                                 </Picker>
                             </Form>
-                            <Item regular>
-                                <Input placeholder='Car Make' onChangeText={this.onMakeValueChange.bind(this)}/>
-                            </Item>
-                            <Item regular>
-                                <Input placeholder='Car Model' onChangeText={this.onModelValueChange.bind(this)}/>
-                            </Item>
-                            <Item regular>
-                                <Input placeholder='Car Color' onChangeText={this.onColorValueChange.bind(this)}/>
-                            </Item>
+                            <Form>
+                                <Item regular success={this.state.makeValidation.valid} error={!this.state.makeValidation.valid}>
+                                    <Input placeholder="Car Make" onChangeText={this.onMakeValueChange.bind(this)}/>
+                                    <Icon name={this.state.makeValidation.validIcon} color={this.state.makeValidation.validIconColor} size={25}/>
+                                </Item>
+                                <Item regular success={this.state.modelValidation.valid} error={!this.state.modelValidation.valid}>
+                                    <Input placeholder="Car Model" onChangeText={this.onModelValueChange.bind(this)}/>
+                                    <Icon name={this.state.modelValidation.validIcon} color={this.state.modelValidation.validIconColor} size={25}/>
+                                </Item>
+                                <Item regular success={this.state.colorValidation.valid} error={!this.state.colorValidation.valid}>
+                                    <Input placeholder="Car Color"onChangeText={this.onColorValueChange.bind(this)}/>
+                                    <Icon name={this.state.colorValidation.validIcon} color={this.state.colorValidation.validIconColor} size={25}/>
+                                </Item>
+                                <Item regular last>
+                                    <Input placeholder="Notes" onChangeText={this.onNotesValueChange.bind(this)}/>
+                                </Item>
+                            </Form>
                         </Content>
                     </Content>
 
                 </Container>
                     <Footer>
                         <FooterTab>
-                            <Button block success style={styles.checkout}
-                                onPress={() => this.props.navigation.navigate("CheckoutScreen")}>
+                            <Button block
+                                    backgroundColor={(this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid) ? this.successColor : this.errorColor}
+                                    style={styles.checkout}
+                                onPress={() => {
+                                    if (this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid) {
+                                        this.props.navigation.navigate("CheckoutScreen");
+                                    }
+                                }}>
                                 <Body>
                                     <Text style={styles.checkoutText}>Checkout</Text>
                                 </Body>

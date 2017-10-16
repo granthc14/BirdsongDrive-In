@@ -35,7 +35,7 @@ export default class DrinkItem extends Component {
                 drPepper: {name: 'Dr. Pepper', price: this.props.item.price, amount:0},
                 dietDrPepper: {name: 'Diet Dr. Pepper', price: this.props.item.price, amount:0},
                 sprite: {name: 'Sprite', price: this.props.item.price, amount:0},
-                melloYello: {name: 'MelloYello', price: this.props.item.price, amount:0},
+                melloYello: {name: 'Mello Yello', price: this.props.item.price, amount:0},
                 lemonade: {name: 'Lemonade', price: this.props.item.price, amount:0},
             },
             size: this.props.size,

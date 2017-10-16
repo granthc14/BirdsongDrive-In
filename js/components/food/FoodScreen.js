@@ -114,7 +114,6 @@ export default class FoodScreen extends Component {
                             <Icon name="settings" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Right>
-
                 </Header>
                 <Tabs>
                     <Tab heading={ <TabHeading><Icon name="food" size={25}/><Text>Food</Text></TabHeading>}>

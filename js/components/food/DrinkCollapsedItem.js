@@ -30,7 +30,7 @@ export default class DrinkCollapsedItem extends Component {
 
     render() {
         return (
-            <ListItem>
+            <ListItem style={{backgroundColor:"#E3E3E3", borderWidth: 2}}>
                 <Left>
                     <Text>{this.state.item.name}</Text>
                 </Left>
@@ -42,6 +42,7 @@ export default class DrinkCollapsedItem extends Component {
                             keyboardType="numeric"
                             maxLength={2}
                             placeholder={this.props.item.amount.toString()}
+                            style={{borderWidth: 0.5}}
                             onChangeText={(value) =>
                             {
                                 if (value === "")
