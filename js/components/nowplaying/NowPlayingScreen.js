@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
-import { Image, View } from "react-native";
+import {ActivityIndicator, Image, View} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     Container,
@@ -29,24 +29,43 @@ export default class NowPlayingScreen extends Component {
     constructor(props) {
         super(props);
         this.movies = {
-          screenOne: { movieOne: {name: "Nut Job", rating: "PG", time:"7:00 PM",  image: img1},
-                        movieTwo: {name: "Dunkirk", rating:"R", time:"9:00 PM", image: img2}},
-            screenTwo: {movieOne: {name: "Baby Driver", rating: "R", time:"7:00 PM", image: img3},
-                        movieTwo: {name: "Dark Tower", rating:"PG-13", time:"9:00 PM", image: img4}}
+            screenOne: {
+                movieOne: {name: "Nut Job", rating: "PG", time: "7:00 PM", image: img1},
+                movieTwo: {name: "Dunkirk", rating: "R", time: "9:00 PM", image: img2}
+            },
+            screenTwo: {
+                movieOne: {name: "Baby Driver", rating: "R", time: "7:00 PM", image: img3},
+                movieTwo: {name: "Dark Tower", rating: "PG-13", time: "9:00 PM", image: img4}
+            }
+
         };
 
         this.state = {
+            isLoading: true,
             screen: 1,
             screenOneMovie: this.movies.screenOne.movieOne,
             screenTwoMovie: this.movies.screenTwo.movieOne
         };
+        this.movieText = '';
+        this.getMovies()
+    }
 
+   async getMovies() {
+       let response = await fetch('https://birdsong.mybluemix.net/get_food');
+       this.movieText = await response.json();
+       this.setState({isLoading: false})
     }
 
 
 
     render() {
-
+        if (this.state.isLoading) {
+            return (
+                <View style={{flex: 1, paddingTop: 20}}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
             <Container style={styles.container}>
                 <Header>
@@ -77,8 +96,8 @@ export default class NowPlayingScreen extends Component {
                         }><Text>Screen 1</Text></Button>
                     <Button last
                             active={this.state.screen === 2}
-                            onPress={() => this.setState({screen:2, screenOneMovie: this.movies.screenOne.movieTwo, screenTwoMovie:this.movies.screenTwo.movieTwo})
-                        }><Text>Screen 2</Text></Button>
+                            onPress={() => this.setState({screen:2, screenOneMovie: this.movies.screenOne.movieTwo, screenTwoMovie:this.movies.screenTwo.movieTwo})}
+                        ><Text>Screen 2</Text></Button>
                 </Segment>
 
                 <Content padder>
