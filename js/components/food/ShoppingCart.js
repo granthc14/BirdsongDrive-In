@@ -34,6 +34,7 @@ export default class ShoppingCart extends Component {
     {
         super(props);
         this.state = {
+            screen: '1',
             paymentMethod: 'card',
             make:'',
             model:'',
@@ -57,6 +58,11 @@ export default class ShoppingCart extends Component {
         }
     }
 
+    onScreenValueChange(value: string) {
+        this.setState({
+            screen:value
+        });
+    }
     onPaymentValueChange(value: string) {
         this.setState({
             paymentMethod:value
@@ -164,12 +170,27 @@ export default class ShoppingCart extends Component {
                                         <Text>#{orderItem.amount}</Text>
                                         <Text>{orderItem.name}</Text>
                                     </Left>
-                                    <Body style={styles.itemTotal}>
-                                        <Text>${orderItem.itemTotal}</Text>
+                                    <Body>
+                                        <Text> {orderItem.condiments.join(" ")}</Text>
                                     </Body>
+                                    <Right style={styles.itemTotal}>
+                                        <Text>${orderItem.itemTotal}</Text>
+                                    </Right>
                                 </ListItem>}
                         />
                         <Content>
+                            <Text style={styles.selectPaymentText}>Screen #</Text>
+                            <Form>
+                                <Picker
+                                    mode="dropdown"
+                                    iosHeader="Select Method"
+                                    selectedValue={this.state.screen}
+                                    onValueChange={this.onScreenValueChange.bind(this)}>
+                                    <Item label="Screen 1" value="1"/>
+                                    <Item label="Screen 2" value="2"/>
+                                </Picker>
+                            </Form>
+
                             <Text style={styles.selectPaymentText}>Select Payment Type</Text>
                             <Form>
                                 <Picker
@@ -196,6 +217,26 @@ export default class ShoppingCart extends Component {
                                 </Item>
                                 <Item regular last>
                                     <Input placeholder="Notes" onChangeText={this.onNotesValueChange.bind(this)}/>
+                                </Item>
+                            </Form>
+                            <Form>
+                                <Item regular>
+                                    <Input
+                                        keyboardType="numeric"
+                                        maxLength={2}
+                                        placeholder='# of Mustard Packets'/>
+                                </Item>
+                                <Item regular>
+                                    <Input
+                                        keyboardType="numeric"
+                                        maxLength={2}
+                                        placeholder='# of Ketchup Packets'/>
+                                </Item>
+                                <Item regular>
+                                    <Input
+                                        keyboardType="numeric"
+                                        maxLength={2}
+                                        placeholder='# of Mayonnaise Packets'/>
                                 </Item>
                             </Form>
                         </Content>
