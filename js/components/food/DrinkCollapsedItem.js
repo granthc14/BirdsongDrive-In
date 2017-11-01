@@ -51,8 +51,8 @@ export default class DrinkCollapsedItem extends Component {
                                 }
                                 let newItem = {name: this.state.item.name, price: this.state.item.price, amount: value};
                                 this.setState({item: newItem});
-                                newItem = {name: this.props.size + " " + this.state.item.name, price: this.state.item.price, amount: value};
-                                this.props.handler(newItem);
+                                newItem = {name: this.props.size + " " + this.state.item.name, price: this.state.item.price, amount: value, condiments: []};
+                                this.props.handler([newItem]);
                             }}/>
                     </Item>
                 </Right>
