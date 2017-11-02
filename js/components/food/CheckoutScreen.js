@@ -21,10 +21,25 @@ export default class CheckoutScreen extends Component {
         this.getOrderNumberAndColor();
     }
 
+
     async getOrderNumberAndColor() {
-        let response = await fetch('https://birdsong.mybluemix.net/order', {
-            method: 'PUT',
-            body: JSON.stringify(this.props.navigation.state.params.order)});
+
+        if (!String.prototype.format) {
+            String.prototype.format = function() {
+                let args = arguments;
+                return this.replace(/{(\d+)}/g, function(match, number) {
+                    return typeof args[number] !== 'undefined'
+                        ? args[number]
+                        : match
+                        ;
+                });
+            };
+        }
+
+        let order = this.props.navigation.state.params.order;
+        let params = '?screenNo={0}&carMake={1}&carModel={2}&carColor={3}&cashOrCard={4}&orderItems={5}&cost={6}'.format(order.screenNo, order.carMake, order.carModel, order.carColor, order.cashOrCard, JSON.stringify(order.items), order.cost);
+        let response = await fetch('https://birdsong.mybluemix.net/order' + params, {
+            method: 'PUT'});
         let bodyText = await response._bodyText;
         this.info = JSON.parse(bodyText);
         this.setState({isLoading: false, color: this.info.orderColor, displayNumber: this.info.displayNumber})

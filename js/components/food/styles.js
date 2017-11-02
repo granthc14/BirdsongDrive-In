@@ -31,7 +31,7 @@ export default {
     },
     numberTextStyle: {
         color: "#000",
-        fontSize: 200,
+        fontSize: 160,
         textAlignVertical: "center",
         textAlign: "center"
     },
