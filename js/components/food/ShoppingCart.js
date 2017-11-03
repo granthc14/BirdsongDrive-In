@@ -141,6 +141,7 @@ export default class ShoppingCart extends Component {
     render() {
 
         const {state} = this.props.navigation;
+        const {navigate} = this.props.navigation;
         return (
                 <Container style={styles.container}>
                     <Header>
@@ -250,7 +251,17 @@ export default class ShoppingCart extends Component {
                                     style={styles.checkout}
                                 onPress={() => {
                                     if (this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid) {
-                                        this.props.navigation.navigate("CheckoutScreen");
+                                        navigate("CheckoutScreen", {order: {
+                                            screenNo: this.state.screen,
+                                            orderNo: 0,
+                                            carMake: this.state.make,
+                                            carModel: this.state.model,
+                                            carColor: this.state.color,
+                                            cashOrCard: this.state.paymentMethod,
+                                            items: state.params.order,
+                                            cost: state.params.totalAmount,
+                                            displayNo: 0
+                                        }});
                                     }
                                 }}>
                                 <Body>
