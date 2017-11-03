@@ -45,6 +45,7 @@ export default class FoodListItem extends Component {
     deleteRow(removedItem) {
         let newItems = this.state.itemsWithCondiments;
         for (let i = 0; i < newItems.length; i++ ) {
+            newItems[i].amount = 1;
             if (this.itemIsEqual(removedItem, newItems[i])) {
                 newItems.splice(i, 1);
                 break;
@@ -55,7 +56,7 @@ export default class FoodListItem extends Component {
         if (this.state.itemsWithCondiments.length === 0) {
             this.props.handler([{name: this.state.item.name, amount: 0}]);
         } else {
-            this.props.handler(newItems);
+            this.props.handler(this.state.itemsWithCondiments);
         }
     }
 

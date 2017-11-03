@@ -67,11 +67,9 @@ export default class FoodScreen extends Component {
         let i;
         let newOrder = this.state.order;
         for (item of items) {
-            for (i = 0; i < newOrder.length; i++) {
-                if (newOrder[i].name === item.name) {
-                    newOrder.splice(i, 1);
-                }
-            }
+            newOrder = newOrder.filter(function(element) {
+               return element.name !== item.name;
+            });
         }
         for (item of items) {
             if (parseInt(item.amount) > 0) {
