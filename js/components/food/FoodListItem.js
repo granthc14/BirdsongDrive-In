@@ -33,12 +33,37 @@ export default class FoodListItem extends Component {
             infoVisible: false,
             amountText: this.props.item.amount,
             condimentsVisible: false,
+            flavorVisible: false,
             removeVisible: false,
             lettuceChecked: false,
             tomatoChecked: false,
             onionChecked: false,
             picklesChecked: false,
-            itemsWithCondiments: this.props.item.itemsWithCondiments
+            itemsWithCondiments: (this.props.item.itemsWithCondiments === undefined) ? [] : this.props.item.itemsWithCondiments
+        };
+        this.drinkTypes = [
+            ["Coke", "Diet Coke"],["Dr. Pepper", "Diet Dr. Pepper"],["Sprite", "Mello Yello"],["Lemonade"]
+        ];
+    }
+
+    deleteDrink(removedDrink) {
+        let newItems = this.state.itemsWithCondiments;
+        for (let i = 0; i < newItems.length; i++ ) {
+            if (this.drinksAreEqual(removedDrink, newItems[i])) {
+                if (removedDrink.amount > 1) {
+                    newItems[i].amount--;
+                } else {
+                    newItems.splice(i, 1);
+                }
+                break;
+            }
+        }
+        this.setState({itemsWithCondiments: newItems, amountText: this.state.amountText - 1});
+        this.setState({removeVisible: false});
+        if (this.state.itemsWithCondiments.length === 0) {
+            this.props.handler([{name: this.state.item.name, amount: 0}]);
+        } else {
+            this.props.handler(this.state.itemsWithCondiments);
         }
     }
 
@@ -58,6 +83,10 @@ export default class FoodListItem extends Component {
         } else {
             this.props.handler(this.state.itemsWithCondiments);
         }
+    }
+
+    drinksAreEqual(drink1, drink2) {
+        return drink1.name === drink2.name;
     }
 
     itemIsEqual(item1, item2) {
@@ -268,7 +297,194 @@ export default class FoodListItem extends Component {
                     </Right>
                 </ListItem>
             );
-        } else {
+        } else if (this.props.item.hasFlavors) {
+            return (
+                <ListItem onLongPress={() => this.setState({infoVisible: true})}>
+                    <Left style={{flex: 2}}>
+                        <Text>{this.state.item.name}</Text>
+                    </Left>
+                    <Body style={{flex: 1}}>
+                    <Text>${this.state.item.price}</Text>
+                    <View>
+                        <Modal animationType="fade"
+                               visible={this.state.infoVisible}
+                               transparent={true}>
+                            <View style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flex: 1,
+                                backgroundColor: '#00000080',
+                                opacity: 50
+                            }}>
+                                <Card style={{width: 300, height: 300, flex: 0}}>
+                                    <CardItem header>
+                                        <Left>
+                                            <Text>{this.state.item.name}</Text>
+                                            <Text note> Calorie and other nutritional information will go here</Text>
+                                        </Left>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Body>
+                                        <Text> An Image Will go here showing the food</Text>
+                                        <Text>A description of the item will also go here</Text>
+                                        </Body>
+                                    </CardItem>
+                                    <CardItem footer>
+                                        <Button transparent onPress={() => this.setState({infoVisible: false})}>
+                                            <Text>Close</Text>
+                                        </Button>
+                                    </CardItem>
+                                </Card>
+                            </View>
+                        </Modal>
+                    </View>
+                    <View>
+                        <Modal animationType="fade"
+                               visible={this.state.removeVisible}
+                               transparent={true}>
+                            <View style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flex: 1,
+                                backgroundColor: '#00000080',
+                                opacity: 50
+                            }}>
+                                <Card style={{width: 300, height: 300, flex: 0}}>
+                                    <CardItem header>
+                                        <Left>
+                                            <Text>Select the item you wish to remove</Text>
+                                        </Left>
+                                        <Right>
+                                            <Button transparent
+                                                    onPress={() => {
+                                                        this.setState({removeVisible: false})}}>
+                                                <Icon name="close" size={25}/></Button>
+                                        </Right>
+                                    </CardItem>
+                                    <Container>
+                                        <Content>
+                                            <List
+                                                dataArray={this.state.itemsWithCondiments}
+                                                renderRow={(orderItem, secId, rowId, rowMap) =>
+                                                    <ListItem>
+                                                        <Left>
+                                                            <Text>{orderItem.name}</Text>
+                                                        </Left>
+                                                        <Body>
+                                                        <Text> {orderItem.amount}</Text>
+                                                        </Body>
+                                                        <Right>
+                                                            <Button transparent onPress={() => this.deleteDrink(orderItem)}>
+                                                                <Icon name="minus" size={25}/>
+                                                            </Button>
+                                                        </Right>
+                                                    </ListItem>}
+                                            />
+                                        </Content>
+                                    </Container>
+                                    <CardItem footer>
+                                        <Button transparent onPress={() => this.setState({removeVisible: false})}>
+                                            <Text>Close</Text>
+                                        </Button>
+                                    </CardItem>
+                                </Card>
+                            </View>
+                        </Modal>
+                    </View>
+                    <View>
+                        <Modal animationType="fade"
+                               visible={this.state.flavorVisible}
+                               transparent={true}>
+                            <View style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                flex: 1,
+                                backgroundColor: '#00000080',
+                                opacity: 50
+                            }}>
+                                <Card style={{width: 300, height: 300, flex: 0}}>
+                                    <CardItem style={{flexDirection:'row'}}>
+                                        <Left>
+                                            <Text>Select Flavor:</Text>
+                                        </Left>
+                                        <Right>
+                                            <Button transparent
+                                                    onPress={() => {
+                                                this.setState({flavorVisible: false})}}>
+                                                <Icon name="close" size={25}/></Button>
+                                        </Right>
+                                    </CardItem>
+                                    <CardItem header>
+                                        <Content>
+                                            <List
+                                                dataArray={this.drinkTypes}
+                                                renderRow={drinks => {
+                                                    if (drinks.length === 1) {
+                                                        return(
+                                                            <View style={{flexDirection:'row', alignItems: 'flex-end'}}>
+                                                                <Left>
+                                                                    <Button transparent
+                                                                            onPress={() => {
+                                                                                this.AddDrink(drinks[0]);
+                                                                            }
+                                                                            }><Text>{drinks[0]}</Text></Button>
+                                                                </Left>
+                                                                <Right>
+                                                                    <Content padder/>
+                                                                </Right>
+                                                            </View>
+                                                        )
+                                                    } else {
+                                                        return (
+                                                            <View style={{flexDirection:'row'}}>
+                                                                <Left style={{flex:1}}>
+                                                                    <Button transparent
+                                                                    onPress={() => {
+                                                                        this.AddDrink(drinks[0]);
+                                                                    }
+                                                                    }><Text>{drinks[0]}</Text></Button>
+                                                                </Left>
+                                                                <Right style={{flex:2}}>
+                                                                    <Button transparent onPress={() => {
+                                                                        this.AddDrink(drinks[1]);
+                                                                    }
+                                                                    }><Text>{drinks[1]}</Text></Button>
+                                                                </Right>
+                                                            </View>)
+                                                    }
+                                                }}
+                                            />
+                                        </Content>
+                                    </CardItem>
+                                </Card>
+                            </View>
+                        </Modal>
+                    </View>
+                    </Body>
+                    <Right style={{flex: 2, alignContent: 'center'}}>
+                        <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Button transparent
+                                    onPress={() => {
+                                        this.setState({removeVisible: true})
+                                    }}>
+                                <Icon name="minus-circle" size={25}/>
+                            </Button>
+                            <Text style={{fontSize: 28, paddingLeft: 10}}>{this.state.amountText}</Text>
+                            <Button transparent style={{paddingLeft: 10}}
+                                    onPress={() => {
+                                        this.setState({flavorVisible: true})
+                                    }}>
+                                <Icon name="plus-circle" size={25}/>
+                            </Button>
+                        </View>
+                    </Right>
+                </ListItem>
+            );
+        }
+        else {
             return (
                 <ListItem onLongPress={() => this.setState({infoVisible: true})}>
                     <Left style={{flex: 2}}>
@@ -342,8 +558,29 @@ export default class FoodListItem extends Component {
         }
     }
 
+    AddDrink(drinks) {
+        let newItem = {
+            name: this.state.item.size + " " + drinks,
+            price: this.state.item.price,
+            amount: 1,
+            condiments: []
+        };
+        let added = false;
+        for (item of this.state.itemsWithCondiments) {
+            if (newItem.name === item.name) {
+                item.amount++;
+                added = true;
+            }
+        }
+        if (!added) {
+            this.state.itemsWithCondiments.push(newItem);
+        }
+        this.setState({amountText: this.state.amountText + 1, flavorVisible: false});
+        this.props.handler(this.state.itemsWithCondiments);
+    }
+
     shouldComponentUpdate(prevProps, prevState) {
-        if (this.props.item.hasCondiments) {
+        if (this.props.item.hasCondiments || this.props.item.hasFlavors) {
             return true;
         }
         if (prevState.item.amount !== this.state.item.amount) {

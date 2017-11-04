@@ -42,9 +42,9 @@ export default class FoodScreen extends Component {
                 dots: {name: "Dippin' Dots", price: 3.50, amount: 0}
             },
             drink:{
-                small: {name: "Small Drink", price: 2.00, amount: 0},
-                medium: {name: "Medium Drink", price: 3.00, amount: 0},
-                large: {name: "Large Drink", price: 4.00, amount: 0},
+                small: {name: "Small Drink", price: 2.00, amount: 0, hasFlavors: true, itemsWithCondiments: [], size:"Small"},
+                medium: {name: "Medium Drink", price: 3.00, amount: 0, hasFlavors: true, itemsWithCondiments: [], size:"Medium"},
+                large: {name: "Large Drink", price: 4.00, amount: 0, hasFlavors: true, itemsWithCondiments: [], size:"Large"},
                 dasani: {name: "Dasani Bottled Water", price: 2.00, amount: 0},
                 yoohoo: {name: "Yoo-Hoo", price: 2.00, amount: 0},
                 monster: {name: "Monster Energy Drink", price: 3.00, amount: 0},
@@ -87,8 +87,8 @@ export default class FoodScreen extends Component {
     updateItems(items) {
         for (item of this.state.order) {
             for (foodItem in items) {
-                if (item.name === items[foodItem].name) {
-                    if (items[foodItem].hasCondiments) {
+                if (item.name === items[foodItem].name || (item.name.split(" ")[0] === items[foodItem].name.split(" ")[0] && items[foodItem].name.split(" ")[1] === "Drink")) {
+                    if (items[foodItem].hasCondiments || items[foodItem].hasFlavors) {
                         items[foodItem].amount += item.amount;
                         items[foodItem].itemsWithCondiments.push(item);
                     } else {
@@ -160,44 +160,27 @@ export default class FoodScreen extends Component {
                     <Tab heading={ <TabHeading><Icon name="food" size={25}/><Text>Food</Text></TabHeading>}>
                         <Content>
                             <List>
-                                <FoodListItem item={this.state.food.hamburger} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.cheeseburger} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.hotdog} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.chilicheesedog} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.smallnachos} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.largenachos} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.chilicheesenachos} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.pickle} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.superpretzel} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.superpretzelwithcheese} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.cottoncandy} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.smallcandy} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.largecandy} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.food.dots} handler = {this.totalHandler}/>
+                                <List
+                                    dataArray={this.state.food}
+                                    renderRow={orderItem =>
+                                        <FoodListItem item={orderItem} handler = {this.totalHandler}/>}/>
                             </List>
                         </Content>
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="water" size={25} /><Text>Drink</Text></TabHeading>}>
                         <Content>
-                            <List>
-                                <DrinkItem item={this.state.drink.small} handler = {this.totalHandler} size = "Small"/>
-                                <DrinkItem item={this.state.drink.medium} handler = {this.totalHandler} size = "Medium"/>
-                                <DrinkItem item={this.state.drink.large} handler = {this.totalHandler} size = "Large"/>
-                                <FoodListItem item={this.state.drink.dasani} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.drink.yoohoo} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.drink.monster} handler = {this.totalHandler}/>
-                            </List>
+                            <List
+                                dataArray={this.state.drink}
+                                renderRow={orderItem =>
+                                    <FoodListItem item={orderItem} handler = {this.totalHandler}/>}/>
                         </Content>
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="popcorn" size={25}/><Text>Popcorn</Text></TabHeading>}>
                         <Content>
-                            <List>
-                                <FoodListItem item={this.state.popcorn.small} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.popcorn.medium} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.popcorn.large} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.popcorn.jumbo} handler = {this.totalHandler}/>
-                                <FoodListItem item={this.state.popcorn.combo} handler = {this.totalHandler}/>
-                            </List>
+                            <List
+                                dataArray={this.state.popcorn}
+                                renderRow={orderItem =>
+                                    <FoodListItem item={orderItem} handler = {this.totalHandler}/>}/>
                         </Content>
                     </Tab>
 
