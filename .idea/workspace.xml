@@ -4,11 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/js/components/food/FoodListItem.js" line="441" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c744606b-da6c-462e-bc02-42e5e0ec9c66" name="Default" comment="Made all food lists dynamic and added new flavor select menu">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/components/food/DrinkCollapsedItem.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/components/food/DrinkItem.js" afterPath="" />
+    <list default="true" id="c744606b-da6c-462e-bc02-42e5e0ec9c66" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/food/FoodListItem.js" afterPath="$PROJECT_DIR$/js/components/food/FoodListItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/food/FoodScreen.js" afterPath="$PROJECT_DIR$/js/components/food/FoodScreen.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,10 +24,11 @@
         <entry file="file://$PROJECT_DIR$/js/components/food/FoodScreen.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="172" column="59" lean-forward="false" selection-start-line="172" selection-start-column="59" selection-end-line="172" selection-end-column="59" />
+              <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
               <folding>
-                <element signature="e#576#1769#0" expanded="false" />
-                <element signature="e#2438#2860#0" expanded="false" />
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#539#1732#0" expanded="false" />
+                <element signature="e#2401#2823#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -311,7 +309,7 @@
       <workItem from="1509651860734" duration="2093000" />
       <workItem from="1509679861630" duration="20000" />
       <workItem from="1509760596934" duration="5772000" />
-      <workItem from="1509825925106" duration="10927000" />
+      <workItem from="1509825925106" duration="11428000" />
     </task>
     <task id="LOCAL-00001" summary="Initial UI Commit">
       <created>1503858494607</created>
@@ -383,21 +381,29 @@
       <option name="project" value="LOCAL" />
       <updated>1509766327052</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Made all food lists dynamic and added new flavor select menu">
+      <created>1509838897519</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1509838897519</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132451000" />
+    <option name="totallyTimeSpent" value="132952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.203125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.203125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25940996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25940996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -456,20 +462,21 @@
     <MESSAGE value="Cycle 2 Commit" />
     <MESSAGE value="Orders now appear on website. Yay!!:D" />
     <MESSAGE value="Fixed layout not being same with food items. Need to do drinks next. Order is saved when navigating back from the shopping cart." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed layout not being same with food items. Need to do drinks next. Order is saved when navigating back from the shopping cart." />
+    <MESSAGE value="Made all food lists dynamic and added new flavor select menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made all food lists dynamic and added new flavor select menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/components/food/FoodScreen.js</url>
-          <line>90</line>
+          <line>89</line>
           <properties />
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/components/food/FoodScreen.js</url>
-          <line>79</line>
+          <line>78</line>
           <properties />
           <option name="timeStamp" value="62" />
         </line-breakpoint>
@@ -797,10 +804,11 @@
     <entry file="file://$PROJECT_DIR$/js/components/food/FoodScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="172" column="59" lean-forward="false" selection-start-line="172" selection-start-column="59" selection-end-line="172" selection-end-column="59" />
+          <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
           <folding>
-            <element signature="e#576#1769#0" expanded="false" />
-            <element signature="e#2438#2860#0" expanded="false" />
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#539#1732#0" expanded="false" />
+            <element signature="e#2401#2823#0" expanded="false" />
           </folding>
         </state>
       </provider>

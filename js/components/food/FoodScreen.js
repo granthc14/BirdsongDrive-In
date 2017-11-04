@@ -20,7 +20,6 @@ import {
     List,
 } from "native-base";
 import FoodListItem from "./FoodListItem";
-import DrinkItem from "./DrinkItem";
 export default class FoodScreen extends Component {
     constructor(props) {
         super(props);
