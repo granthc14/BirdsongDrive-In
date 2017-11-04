@@ -146,7 +146,7 @@ export default class ShoppingCart extends Component {
                 <Container style={styles.container}>
                     <Header>
                         <Left>
-                            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Button transparent onPress={() => navigate("Food", {order: state.params.order, totalAmount: state.params.totalAmount})}>
                                 <Icon name="arrow-left" size={25} style={{color:'white'}} />
                             </Button>
                         </Left>

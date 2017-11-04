@@ -26,8 +26,8 @@ export default class FoodScreen extends Component {
         super(props);
         this.state = {
             food: {
-                hamburger: {name: "Hamburger", price: 3.50, amount: 0, condiments: [], hasCondiments: true},
-                cheeseburger: {name: "Cheeseburger", price: 4.00, amount: 0, condiments: [], hasCondiments: true},
+                hamburger: {name: "Hamburger", price: 3.50, amount: 0, hasCondiments: true, itemsWithCondiments: []},
+                cheeseburger: {name: "Cheeseburger", price: 4.00, amount: 0, hasCondiments: true, itemsWithCondiments: []},
                 hotdog: {name: "Hotdog", price: 3.00, amount: 0},
                 chilicheesedog: {name: "Chili-Cheese Dog", price: 4.00, amount: 0},
                 smallnachos: {name: "Small Nachos", price: 3.00, amount: 0},
@@ -59,16 +59,52 @@ export default class FoodScreen extends Component {
             order: [],
             totalAmount: 0,
             shoppingCartColor: 'black'
-        }
+        };
+        this.addPreviousOrder();
         this.totalHandler = this.addTotal.bind(this);
+    }
+
+    addPreviousOrder() {
+        if (this.props.navigation !== undefined) {
+            if (this.props.navigation.state.params !== undefined) {
+                if (this.props.navigation.state.params.order !== undefined) {
+                    this.state.totalAmount = this.props.navigation.state.params.totalAmount;
+                    this.state.order = this.props.navigation.state.params.order;
+                    let color = 'black';
+
+                    if (this.state.totalAmount > 0) {
+                        color = '#32cd32';
+                    }
+                    this.state.shoppingCartColor = color;
+                    this.updateItems(this.state.food);
+                    this.updateItems(this.state.drink);
+                    this.updateItems(this.state.popcorn);
+                }
+            }
+        }
+    }
+
+    updateItems(items) {
+        for (item of this.state.order) {
+            for (foodItem in items) {
+                if (item.name === items[foodItem].name) {
+                    if (items[foodItem].hasCondiments) {
+                        items[foodItem].amount += item.amount;
+                        items[foodItem].itemsWithCondiments.push(item);
+                    } else {
+                        items[foodItem].amount = item.amount;
+                    }
+                }
+            }
+        }
     }
 
     addTotal(items) {
         let i;
         let newOrder = this.state.order;
         for (item of items) {
-            newOrder = newOrder.filter(function(element) {
-               return element.name !== item.name;
+            newOrder = newOrder.filter(function (element) {
+                return element.name !== item.name;
             });
         }
         for (item of items) {
@@ -89,7 +125,7 @@ export default class FoodScreen extends Component {
         }
         let color = 'black';
         if (total > 0) {
-            color =  '#32cd32';
+            color = '#32cd32';
         }
         this.setState({order: newOrder, totalAmount: total, shoppingCartColor: color});
     }

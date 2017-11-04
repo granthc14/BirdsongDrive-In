@@ -38,7 +38,7 @@ export default class FoodListItem extends Component {
             tomatoChecked: false,
             onionChecked: false,
             picklesChecked: false,
-            itemsWithCondiments: []
+            itemsWithCondiments: this.props.item.itemsWithCondiments
         }
     }
 
@@ -271,7 +271,7 @@ export default class FoodListItem extends Component {
         } else {
             return (
                 <ListItem onLongPress={() => this.setState({infoVisible: true})}>
-                    <Left>
+                    <Left style={{flex: 2}}>
                         <Text>{this.state.item.name}</Text>
                     </Left>
                     <Body>
@@ -306,26 +306,50 @@ export default class FoodListItem extends Component {
                     </View>
 
                     </Body>
-                    <Right>
-                        <Item regular>
-                            <Input
-                                keyboardType="numeric"
-                                maxLength={2}
-                                placeholder={this.props.item.amount.toString()}
-                                onChangeText={(value) =>
-                                {
-                                    if (value === "")
-                                    {
-                                        value = 0;
-                                    }
-                                    let newItem = {name: this.state.item.name, price: this.state.item.price, amount: value, condiments:[]};
-                                    this.setState({item: newItem});
-                                    this.props.handler([newItem]);
-                                }}/>
-                        </Item>
+                    <Right style={{flex: 2, alignContent: 'center'}}>
+                        <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Button transparent
+                                    onPress={() => {
+                                        let newItem = {};
+                                        if (this.state.item.amount === 0) {
+                                            newItem = {name: this.state.item.name, price: this.state.item.price, amount: 0, condiments:[]};
+                                        } else {
+                                            newItem = {
+                                                name: this.state.item.name,
+                                                price: this.state.item.price,
+                                                amount: this.state.item.amount - 1,
+                                                condiments: []
+                                            };
+                                        }
+                                        this.setState({item: newItem});
+                                        this.props.handler([newItem]);
+                                    }}>
+                                <Icon name="minus-circle" size={25}/>
+                            </Button>
+                            <Text style={{fontSize: 28, paddingLeft: 10}}>{this.state.item.amount}</Text>
+                            <Button transparent style={{paddingLeft: 10}}
+                                    onPress={() => {
+                                        let newItem = {name: this.state.item.name, price: this.state.item.price, amount: this.state.item.amount + 1, condiments:[]};
+                                        this.setState({item: newItem});
+                                        this.props.handler([newItem]);
+                                    }}>
+                                <Icon name="plus-circle" size={25}/>
+                            </Button>
+                        </View>
                     </Right>
                 </ListItem>
             );
+        }
+    }
+
+    shouldComponentUpdate(prevProps, prevState) {
+        if (this.props.item.hasCondiments) {
+            return true;
+        }
+        if (prevState.item.amount !== this.state.item.amount) {
+            return true;
+        } else {
+            return false;
         }
     }
 
