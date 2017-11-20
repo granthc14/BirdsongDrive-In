@@ -144,14 +144,14 @@ export default class ShoppingCart extends Component {
         const {navigate} = this.props.navigation;
         return (
                 <Container style={styles.container}>
-                    <Header>
-                        <Left>
+                    <Header style={styles.headerFooterStyle}>
+                        <Left style={styles.menuTextStyle}>
                             <Button transparent onPress={() => navigate("Food", {order: state.params.order, totalAmount: state.params.totalAmount})}>
                                 <Icon name="arrow-left" size={25} style={{color:'white'}} />
                             </Button>
+                            <Title style={styles.tabHeaderTextStyle}>Your Order</Title>
                         </Left>
                         <Body>
-                        <Title>Your Order</Title>
                         </Body>
                         <Right>
                             <Button
