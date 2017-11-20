@@ -52,16 +52,17 @@ export default class NowPlayingScreen extends Component {
         }
         return (
             <Container style={styles.container}>
-                <Header>
-                    <Left>
+                <Header
+                    style={styles.headerFooterStyle}>
+                    <Left style={styles.menuTextStyle}>
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
                             <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
+                        <Title style={styles.tabHeaderTextStyle}>Now Playing</Title>
                     </Left>
                     <Body>
-                    <Title>Now Playing</Title>
                     </Body>
                     <Right>
                         <Button

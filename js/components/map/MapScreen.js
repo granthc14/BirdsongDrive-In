@@ -46,16 +46,17 @@ export default class MapScreen extends Component {
 
         return (
             <Container>
-                <Header>
-                    <Left>
+                <Header
+                    style={styles.headerFooterStyle}>
+                    <Left style={styles.menuTextStyle}>
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
                             <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
+                        <Title style={styles.tabHeaderTextStyle}>Map</Title>
                     </Left>
                     <Body>
-                    <Title>Map</Title>
                     </Body>
                     <Right>
                         <Button

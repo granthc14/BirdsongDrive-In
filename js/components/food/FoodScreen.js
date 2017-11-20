@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./styles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { Platform } from 'react-native';
 import {
     Container,
     Header,
@@ -57,11 +58,17 @@ export default class FoodScreen extends Component {
             },
             order: [],
             totalAmount: 0,
-            shoppingCartColor: 'black'
+            shoppingCartColor: 'white',
+            foodSelected: true,
+            drinkSelected: false,
+            popcornSelected: false
         };
         this.addPreviousOrder();
         this.totalHandler = this.addTotal.bind(this);
     }
+
+    emptyCartColor = 'white';
+    fullCartColor = '#36D2D2';
 
     addPreviousOrder() {
         if (this.props.navigation !== undefined) {
@@ -69,10 +76,10 @@ export default class FoodScreen extends Component {
                 if (this.props.navigation.state.params.order !== undefined) {
                     this.state.totalAmount = this.props.navigation.state.params.totalAmount;
                     this.state.order = this.props.navigation.state.params.order;
-                    let color = 'black';
+                    let color = this.emptyCartColor;
 
                     if (this.state.totalAmount > 0) {
-                        color = '#32cd32';
+                        color = this.fullCartColor;
                     }
                     this.state.shoppingCartColor = color;
                     this.updateItems(this.state.food);
@@ -122,11 +129,21 @@ export default class FoodScreen extends Component {
         for (i = 0; i < newOrder.length; i++) {
             total = total + newOrder[i].itemTotal;
         }
-        let color = 'black';
+        let color = this.emptyCartColor;
         if (total > 0) {
-            color = '#32cd32';
+            color = this.fullCartColor;
         }
         this.setState({order: newOrder, totalAmount: total, shoppingCartColor: color});
+    }
+
+    onChangeTab(tab) {
+        if (tab.i === 0) {
+            this.setState({foodSelected: true, drinkSelected: false, popcornSelected: false})
+        } else if (tab.i === 1) {
+            this.setState({foodSelected: false, drinkSelected: true, popcornSelected: false})
+        } else {
+            this.setState({foodSelected: false, drinkSelected: false, popcornSelected: true})
+        }
     }
 
 
@@ -136,27 +153,30 @@ export default class FoodScreen extends Component {
         return (
             <Container style={styles.container}>
                 <Header
-                    hasTabs>
-                    <Left>
+                    hasTabs
+                    style={styles.headerFooterStyle}>
+                    <Left style={styles.menuTextStyle}>
                         <Button
                             transparent
                             onPress={() => this.props.navigation.navigate("DrawerOpen")}>
                             <Icon name="menu" style={{color: 'white'}} size={25}/>
                         </Button>
+                        <Title style={styles.tabHeaderTextStyle}>Food</Title>
                     </Left>
                     <Body>
-                    <Title>Food</Title>
                     </Body>
                     <Right>
                         <Button
                             transparent
                             onPress={()=> this.props.navigation.navigate("Settings")}>
-                            <Icon name="settings" style={{color: 'white'}} size={25}/>
+                            <Icon name="settings" style={styles.tabHeaderTextStyle} size={25}/>
                         </Button>
                     </Right>
                 </Header>
-                <Tabs>
-                    <Tab heading={ <TabHeading><Icon name="food" size={25}/><Text>Food</Text></TabHeading>}>
+                <Tabs
+                    tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
+                    onChangeTab={this.onChangeTab.bind(this)}>
+                    <Tab heading={ <TabHeading style={styles.tabStyle}><Icon style={this.state.foodSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle} name="food" size={25} /><Text style={this.state.foodSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle} >Food</Text></TabHeading>}>
                         <Content>
                             <List>
                                 <List
@@ -166,7 +186,7 @@ export default class FoodScreen extends Component {
                             </List>
                         </Content>
                     </Tab>
-                    <Tab heading={ <TabHeading><Icon name="water" size={25} /><Text>Drink</Text></TabHeading>}>
+                    <Tab heading={ <TabHeading style={styles.tabStyle}><Icon style={this.state.drinkSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle} name="water" size={25} /><Text style={this.state.drinkSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle}>Drink</Text></TabHeading>}>
                         <Content>
                             <List
                                 dataArray={this.state.drink}
@@ -174,7 +194,7 @@ export default class FoodScreen extends Component {
                                     <FoodListItem item={orderItem} handler = {this.totalHandler}/>}/>
                         </Content>
                     </Tab>
-                    <Tab heading={ <TabHeading><Icon name="popcorn" size={25}/><Text>Popcorn</Text></TabHeading>}>
+                    <Tab heading={ <TabHeading style={styles.tabStyle}><Icon style={this.state.popcornSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle} name="popcorn" size={25}/><Text style={this.state.popcornSelected ? styles.tabIconActiveStyle : styles.tabIconNotActiveStyle}>Popcorn</Text></TabHeading>}>
                         <Content>
                             <List
                                 dataArray={this.state.popcorn}
@@ -184,9 +204,9 @@ export default class FoodScreen extends Component {
                     </Tab>
 
                 </Tabs>
-                <Footer>
+                <Footer style={styles.headerFooterStyle}>
                     <Left>
-                        <Text style={{marginLeft: 10, fontSize: 25}}>Total: ${this.state.totalAmount}</Text>
+                        <Text style={styles.totalTextStyle}>Total: ${this.state.totalAmount}</Text>
                     </Left>
                     <Right>
                         <Button transparent

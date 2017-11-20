@@ -48,5 +48,31 @@ export default {
     }, drinksRight: {
         flexDirection: 'column',
         flex: 1
+    }, plusMinusStyle: {
+      color:'#36D2D2'
+    }, headerFooterStyle: {
+        backgroundColor:'#0681E6'
+    }, totalTextStyle: {
+        marginLeft: 10,
+        fontSize: 25,
+        color: '#FFF'
+    },tabStyle: {
+        backgroundColor:'#0681E6',
+        textStyle: {
+            fontColor: '#FFF'
+        }
+    }, tabHeaderTextStyle:{
+      color:'#FFF'
+    }, tabBarUnderlineStyle: {
+      backgroundColor:'#36D2D2',
+        marginBottom: 2
+    },menuTextStyle: {
+      flexDirection:'row',
+        alignItems: 'center'
+    }, tabIconActiveStyle: {
+      color:'#36D2D2'
+    }, tabIconNotActiveStyle: {
+      color: '#FFF'
     }
+
 };

@@ -8,5 +8,12 @@ export default {
   },
     map: {
         ...StyleSheet.absoluteFillObject,
-    },
+    }, headerFooterStyle: {
+    backgroundColor:'#0681E6'
+  }, tabHeaderTextStyle:{
+        color:'#FFF'
+    },menuTextStyle: {
+        flexDirection:'row',
+        alignItems: 'center'
+    }
 };
