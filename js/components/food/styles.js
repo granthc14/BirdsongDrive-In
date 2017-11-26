@@ -1,7 +1,7 @@
 const React = require("react-native");
 
 const { StyleSheet } = React;
-
+import { Platform } from 'react-native';
 export default {
   container: {
     backgroundColor: "#fff"
@@ -71,6 +71,9 @@ export default {
     }, tabIconActiveStyle: {
       color:'#FFF'
     }, tabIconNotActiveStyle: {
+        color: Platform.OS === 'ios' ? '#033B6A' : ''
+    }, plusMinusiOSStyle: {
+      color:'#757575'
     }
 
 };

@@ -23,6 +23,7 @@ import {
 } from "native-base";
 import {View,Modal, ListView} from 'react-native';
 import FoodScreen from "./FoodScreen";
+import { Platform } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 export default class FoodListItem extends Component {
 
@@ -284,14 +285,14 @@ export default class FoodListItem extends Component {
                                     onPress={() => {
                                         this.setState({removeVisible: true})
                                     }}>
-                                <Icon name="minus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="minus-circle" size={25} style={Platform.OS === 'iOS' ? styles.plusMinusiOSStyle : Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                             <Text style={{fontSize: 28, paddingLeft: 10}}>{this.state.amountText}</Text>
                             <Button transparent style={{paddingLeft: 10}}
                                     onPress={() => {
                                         this.setState({condimentsVisible: true})
                                     }}>
-                                <Icon name="plus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="plus-circle" size={25} style={Platform.OS === 'iOS' ? styles.plusMinusiOSStyle : Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                         </View>
                     </Right>
@@ -470,14 +471,14 @@ export default class FoodListItem extends Component {
                                     onPress={() => {
                                         this.setState({removeVisible: true})
                                     }}>
-                                <Icon name="minus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="minus-circle" size={25} style={Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                             <Text style={{fontSize: 28, paddingLeft: 10}}>{this.state.amountText}</Text>
                             <Button transparent style={{paddingLeft: 10}}
                                     onPress={() => {
                                         this.setState({flavorVisible: true})
                                     }}>
-                                <Icon name="plus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="plus-circle" size={25} style={Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                         </View>
                     </Right>
@@ -540,7 +541,7 @@ export default class FoodListItem extends Component {
                                         this.setState({item: newItem});
                                         this.props.handler([newItem]);
                                     }}>
-                                <Icon name="minus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="minus-circle" size={25} style={Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                             <Text style={{fontSize: 28, paddingLeft: 10}}>{this.state.item.amount}</Text>
                             <Button transparent style={{paddingLeft: 10}}
@@ -549,7 +550,7 @@ export default class FoodListItem extends Component {
                                         this.setState({item: newItem});
                                         this.props.handler([newItem]);
                                     }}>
-                                <Icon name="plus-circle" size={25} style={styles.plusMinusStyle}/>
+                                <Icon name="plus-circle" size={25} style={Platform.OS === 'ios' ? styles.plusMinusiOSStyle : styles.plusMinusStyle}/>
                             </Button>
                         </View>
                     </Right>

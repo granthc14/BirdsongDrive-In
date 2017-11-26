@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import { Platform } from 'react-native';
 import {
     Container,
     Header,
