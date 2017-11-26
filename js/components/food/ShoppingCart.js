@@ -40,6 +40,9 @@ export default class ShoppingCart extends Component {
             model:'',
             color:'',
             notes:'',
+            numberKetchup:'',
+            numberMustard:'',
+            numberMayonnaise:'',
             makeValidation: {
                 valid: false,
                 validIcon: this.errorIcon,
@@ -138,6 +141,23 @@ export default class ShoppingCart extends Component {
         });
     }
 
+    onKetchupValueChange(value: string) {
+        this.setState({
+            numberKetchup: value
+        });
+    }
+
+    onMustardValueChange(value: string) {
+        this.setState({
+            numberMustard: value
+        });
+    }
+    onMayoValueChange(value: string) {
+        this.setState({
+            numberMayonnaise: value
+        });
+    }
+
     render() {
 
         const {state} = this.props.navigation;
@@ -151,8 +171,6 @@ export default class ShoppingCart extends Component {
                             </Button>
                             <Title style={styles.tabHeaderTextStyle}>Your Order</Title>
                         </Left>
-                        <Body>
-                        </Body>
                         <Right>
                             <Button
                                 transparent
@@ -225,19 +243,22 @@ export default class ShoppingCart extends Component {
                                     <Input
                                         keyboardType="numeric"
                                         maxLength={2}
-                                        placeholder='# of Mustard Packets'/>
+                                        placeholder='# of Mustard Packets'
+                                        onChangeText={this.onMustardValueChange.bind(this)}/>
                                 </Item>
                                 <Item regular>
                                     <Input
                                         keyboardType="numeric"
                                         maxLength={2}
-                                        placeholder='# of Ketchup Packets'/>
+                                        placeholder='# of Ketchup Packets'
+                                        onChangeText={this.onKetchupValueChange.bind(this)}/>
                                 </Item>
                                 <Item regular>
                                     <Input
                                         keyboardType="numeric"
                                         maxLength={2}
-                                        placeholder='# of Mayonnaise Packets'/>
+                                        placeholder='# of Mayonnaise Packets'
+                                        onChangeText={this.onMayoValueChange.bind(this)}/>
                                 </Item>
                             </Form>
                         </Content>
@@ -260,6 +281,12 @@ export default class ShoppingCart extends Component {
                                             cashOrCard: this.state.paymentMethod,
                                             items: state.params.order,
                                             cost: state.params.totalAmount,
+                                            extras: {
+                                              notes: this.state.notes,
+                                              numKetchup: this.state.numberKetchup,
+                                              numMustard: this.state.numberMustard,
+                                              numMayonnaise: this.state.numberMayonnaise
+                                            },
                                             displayNo: 0
                                         }});
                                     }

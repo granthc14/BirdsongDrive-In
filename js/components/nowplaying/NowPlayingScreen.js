@@ -29,15 +29,15 @@ export default class NowPlayingScreen extends Component {
         this.state = {
             isLoading: true,
             screen: 1,
-            screenOneMovie: {},
-            screenTwoMovie: {}
+            earlyMovie: {},
+            laterMovie: {}
         };
     }
 
    async getMovies() {
        let response = await fetch('https://birdsong.mybluemix.net/get_movies');
        this.movies = await response.json();
-       this.setState({isLoading: false, screenOneMovie: this.movies.screenOne.movieOne, screenTwoMovie: this.movies.screenTwo.movieOne})
+       this.setState({isLoading: false, earlyMovie: this.movies.screenOne.movieOne, laterMovie: this.movies.screenOne.movieTwo})
     }
 
 
@@ -62,8 +62,6 @@ export default class NowPlayingScreen extends Component {
                         </Button>
                         <Title style={styles.tabHeaderTextStyle}>Now Playing</Title>
                     </Left>
-                    <Body>
-                    </Body>
                     <Right>
                         <Button
                             transparent
@@ -72,16 +70,16 @@ export default class NowPlayingScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Segment>
+                <Segment style={styles.headerFooterStyle}>
                     <Button
                         first
                         active={this.state.screen === 1}
                         onPress={
-                            () => this.setState({screen:1, screenOneMovie: this.movies.screenOne.movieOne, screenTwoMovie:this.movies.screenTwo.movieOne})
+                            () => this.setState({screen:1, earlyMovie: this.movies.screenOne.movieOne, laterMovie:this.movies.screenOne.movieTwo})
                         }><Text>Screen 1</Text></Button>
                     <Button last
                             active={this.state.screen === 2}
-                            onPress={() => this.setState({screen:2, screenOneMovie: this.movies.screenOne.movieTwo, screenTwoMovie:this.movies.screenTwo.movieTwo})}
+                            onPress={() => this.setState({screen:2, earlyMovie: this.movies.screenTwo.movieOne, laterMovie:this.movies.screenTwo.movieTwo})}
                         ><Text>Screen 2</Text></Button>
                 </Segment>
 
@@ -90,8 +88,8 @@ export default class NowPlayingScreen extends Component {
                         <CardItem>
                             <Left>
                                 <Body>
-                                <Text>{this.state.screenOneMovie.name}</Text>
-                                <Text note>{this.state.screenOneMovie.rating} {this.state.screenOneMovie.startTime}</Text>
+                                <Text>{this.state.earlyMovie.name}</Text>
+                                <Text note>{this.state.earlyMovie.rating} {this.state.earlyMovie.startTime}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
@@ -101,7 +99,7 @@ export default class NowPlayingScreen extends Component {
                                 width: 200,
                                 height: 200,
                                 flex: 1
-                            }} source={{uri: this.state.screenOneMovie.imgPath}}/>
+                            }} source={{uri: this.state.earlyMovie.imgPath}}/>
                         </CardItem>
                     </Card>
 
@@ -109,8 +107,8 @@ export default class NowPlayingScreen extends Component {
                         <CardItem>
                             <Left>
                                 <Body>
-                                <Text>{this.state.screenTwoMovie.name}</Text>
-                                <Text note>{this.state.screenTwoMovie.rating} {this.state.screenTwoMovie.startTime}</Text>
+                                <Text>{this.state.laterMovie.name}</Text>
+                                <Text note>{this.state.laterMovie.rating} {this.state.laterMovie.startTime}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
@@ -120,7 +118,7 @@ export default class NowPlayingScreen extends Component {
                                 width: 200,
                                 height: 200,
                                 flex: 1
-                            }} source={{uri: this.state.screenTwoMovie.imgPath}}/>
+                            }} source={{uri: this.state.laterMovie.imgPath}}/>
                         </CardItem>
                     </Card>
                 </Content>

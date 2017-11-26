@@ -68,7 +68,7 @@ export default class FoodScreen extends Component {
     }
 
     emptyCartColor = 'white';
-    fullCartColor = '#36D2D2';
+    fullCartColor = '#4BFF32';
 
     addPreviousOrder() {
         if (this.props.navigation !== undefined) {

@@ -49,7 +49,6 @@ export default {
         flexDirection: 'column',
         flex: 1
     }, plusMinusStyle: {
-      color:'#36D2D2'
     }, headerFooterStyle: {
         backgroundColor:'#0681E6'
     }, totalTextStyle: {
@@ -64,15 +63,14 @@ export default {
     }, tabHeaderTextStyle:{
       color:'#FFF'
     }, tabBarUnderlineStyle: {
-      backgroundColor:'#36D2D2',
+      backgroundColor:'#FFF',
         marginBottom: 2
     },menuTextStyle: {
       flexDirection:'row',
         alignItems: 'center'
     }, tabIconActiveStyle: {
-      color:'#36D2D2'
+      color:'#FFF'
     }, tabIconNotActiveStyle: {
-      color: '#FFF'
     }
 
 };
