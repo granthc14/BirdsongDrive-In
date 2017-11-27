@@ -162,15 +162,6 @@ export default class FoodScreen extends Component {
                         </Button>
                         <Title style={styles.tabHeaderTextStyle}>Food</Title>
                     </Left>
-                    <Body>
-                    </Body>
-                    <Right>
-                        <Button
-                            transparent
-                            onPress={()=> this.props.navigation.navigate("Settings")}>
-                            <Icon name="settings" style={styles.tabHeaderTextStyle} size={25}/>
-                        </Button>
-                    </Right>
                 </Header>
                 <Tabs
                     tabBarUnderlineStyle={styles.tabBarUnderlineStyle}

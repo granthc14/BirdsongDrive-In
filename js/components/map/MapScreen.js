@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
-import {View} from 'react-native';
+import {View, Linking} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     ActionSheet,
@@ -18,9 +18,10 @@ import {
     Body
 } from "native-base";
 
-let ACTIONS = ["Use my location", "Use new location", "Cancel"];
-let CANCEL_INDEX = 2;
+let ACTIONS = ["Use my location", "Cancel"];
+let CANCEL_INDEX = 1;
 import MapView from 'react-native-maps';
+let url = 'https://www.google.com/maps/dir/?api=1&destination=Birdsong+Drive-In&travelmode=car';
 
 export default class MapScreen extends Component {
 
@@ -41,7 +42,19 @@ export default class MapScreen extends Component {
                 }
             ]
         }
+
     }
+
+    openGoogleMaps() {
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('Can\'t handle url: ' + url);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+    }
+
     render() {
 
         return (
@@ -70,15 +83,13 @@ export default class MapScreen extends Component {
                                     },
                                     buttonIndex => {
                                         this.setState({ clicked: ACTIONS[buttonIndex] });
+                                        if (buttonIndex !== CANCEL_INDEX) {
+                                            this.openGoogleMaps()
+                                        }
                                     }
-                                )}>
+                                    )
+                                }>
                             <Icon name="google-maps" style={{color: 'white'}} size={25}/>
-                        </Button>
-
-                        <Button
-                            transparent
-                            onPress={()=> this.props.navigation.navigate("Settings")}>
-                            <Icon name="settings" style={{color: 'white'}} size={25}/>
                         </Button>
                     </Right>
                 </Header>

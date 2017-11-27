@@ -62,13 +62,6 @@ export default class NowPlayingScreen extends Component {
                         </Button>
                         <Title style={styles.tabHeaderTextStyle}>Now Playing</Title>
                     </Left>
-                    <Right>
-                        <Button
-                            transparent
-                            onPress={()=> this.props.navigation.navigate("Settings")}>
-                            <Icon name="settings" style={{color: 'white'}} size={25}/>
-                        </Button>
-                    </Right>
                 </Header>
                 <Segment style={styles.headerFooterStyle}>
                     <Button
