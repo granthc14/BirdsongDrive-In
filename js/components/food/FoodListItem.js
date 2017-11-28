@@ -111,46 +111,12 @@ export default class FoodListItem extends Component {
     render() {
         if (this.props.item.hasCondiments) {
             return (
-                <ListItem onLongPress={() => this.setState({infoVisible: true})}>
+                <ListItem>
                     <Left style={{flex: 2}}>
                         <Text>{this.state.item.name}</Text>
                     </Left>
                     <Body style={{flex: 1}}>
                     <Text>${this.state.item.price}</Text>
-                    <View>
-                        <Modal animationType="fade"
-                               visible={this.state.infoVisible}
-                               transparent={true}>
-                            <View style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                flex: 1,
-                                backgroundColor: '#00000080',
-                                opacity: 50
-                            }}>
-                                <Card style={{width: 300, height: 300, flex: 0}}>
-                                    <CardItem header>
-                                        <Left>
-                                            <Text>{this.state.item.name}</Text>
-                                            <Text note> Calorie and other nutritional information will go here</Text>
-                                        </Left>
-                                    </CardItem>
-                                    <CardItem>
-                                        <Body>
-                                        <Text> An Image Will go here showing the food</Text>
-                                        <Text>A description of the item will also go here</Text>
-                                        </Body>
-                                    </CardItem>
-                                    <CardItem footer>
-                                        <Button transparent onPress={() => this.setState({infoVisible: false})}>
-                                            <Text>Close</Text>
-                                        </Button>
-                                    </CardItem>
-                                </Card>
-                            </View>
-                        </Modal>
-                    </View>
                     <View>
                         <Modal animationType="fade"
                                visible={this.state.removeVisible}
@@ -212,10 +178,17 @@ export default class FoodListItem extends Component {
                                 opacity: 50
                             }}>
                                 <Card style={{width: 300, height: 300, flex: 0}}>
-                                    <CardItem>
-                                        <Text>Select Condiments:</Text>
-                                    </CardItem>
                                     <CardItem header>
+                                        <Left>
+                                            <Text>Select Condiments:</Text>
+                                        </Left>
+                                        <Right>
+                                            <Button transparent
+                                                    onPress={() => {
+                                                        this.setState({condimentsVisible: false})}}>
+                                                <Icon name="close" size={25}/></Button>
+                                        </Right>
+                                    </CardItem>
                                         <Content>
                                             <ListItem>
                                                 <CheckBox checked={this.state.lettuceChecked} onPress={() => this.toggleLettuce(this.state.lettuceChecked)}/>
@@ -242,7 +215,6 @@ export default class FoodListItem extends Component {
                                                 </Body>
                                             </ListItem>
                                         </Content>
-                                    </CardItem>
                                     <CardItem footer>
                                         <Button transparent onPress={() => {
                                             this.setState({condimentsVisible: false});
@@ -267,11 +239,6 @@ export default class FoodListItem extends Component {
                                             this.props.handler(this.state.itemsWithCondiments);
                                         }}>
                                             <Text>Add Item</Text>
-                                        </Button>
-                                    </CardItem>
-                                    <CardItem footer>
-                                        <Button transparent onPress={() => this.setState({condimentsVisible: false})}>
-                                            <Text>Close</Text>
                                         </Button>
                                     </CardItem>
                                 </Card>
@@ -300,46 +267,12 @@ export default class FoodListItem extends Component {
             );
         } else if (this.props.item.hasFlavors) {
             return (
-                <ListItem onLongPress={() => this.setState({infoVisible: true})}>
+                <ListItem>
                     <Left style={{flex: 2}}>
                         <Text>{this.state.item.name}</Text>
                     </Left>
                     <Body style={{flex: 1}}>
                     <Text>${this.state.item.price}</Text>
-                    <View>
-                        <Modal animationType="fade"
-                               visible={this.state.infoVisible}
-                               transparent={true}>
-                            <View style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                flex: 1,
-                                backgroundColor: '#00000080',
-                                opacity: 50
-                            }}>
-                                <Card style={{width: 300, height: 300, flex: 0}}>
-                                    <CardItem header>
-                                        <Left>
-                                            <Text>{this.state.item.name}</Text>
-                                            <Text note> Calorie and other nutritional information will go here</Text>
-                                        </Left>
-                                    </CardItem>
-                                    <CardItem>
-                                        <Body>
-                                        <Text> An Image Will go here showing the food</Text>
-                                        <Text>A description of the item will also go here</Text>
-                                        </Body>
-                                    </CardItem>
-                                    <CardItem footer>
-                                        <Button transparent onPress={() => this.setState({infoVisible: false})}>
-                                            <Text>Close</Text>
-                                        </Button>
-                                    </CardItem>
-                                </Card>
-                            </View>
-                        </Modal>
-                    </View>
                     <View>
                         <Modal animationType="fade"
                                visible={this.state.removeVisible}
@@ -487,41 +420,12 @@ export default class FoodListItem extends Component {
         }
         else {
             return (
-                <ListItem onLongPress={() => this.setState({infoVisible: true})}>
+                <ListItem>
                     <Left style={{flex: 2}}>
                         <Text>{this.state.item.name}</Text>
                     </Left>
                     <Body>
                     <Text>${this.state.item.price}</Text>
-
-                    <View>
-                        <Modal animationType="fade"
-                               visible={this.state.infoVisible}
-                               transparent={true}>
-                            <View style={{flexDirection:'column', justifyContent: 'center', alignItems:'center', flex:1, backgroundColor: '#00000080', opacity: 50}}>
-                                <Card style={{width:300, height:300, flex: 0}}>
-                                    <CardItem header>
-                                        <Left>
-                                            <Text>{this.state.item.name}</Text>
-                                            <Text note> Calorie and other nutritional information will go here</Text>
-                                        </Left>
-                                    </CardItem>
-                                    <CardItem>
-                                        <Body>
-                                        <Text> An Image Will go here showing the food</Text>
-                                        <Text>A description of the item will also go here</Text>
-                                        </Body>
-                                    </CardItem>
-                                    <CardItem footer>
-                                        <Button transparent onPress={() => this.setState({infoVisible: false})}>
-                                            <Text>Close</Text>
-                                        </Button>
-                                    </CardItem>
-                                </Card>
-                            </View>
-                        </Modal>
-                    </View>
-
                     </Body>
                     <Right style={{flex: 2, alignContent: 'center'}}>
                         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center', alignItems: 'center'}}>

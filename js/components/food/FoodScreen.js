@@ -162,6 +162,7 @@ export default class FoodScreen extends Component {
                         </Button>
                         <Title style={styles.tabHeaderTextStyle}>Food</Title>
                     </Left>
+                    <Right/>
                 </Header>
                 <Tabs
                     tabBarUnderlineStyle={styles.tabBarUnderlineStyle}

@@ -62,6 +62,7 @@ export default class NowPlayingScreen extends Component {
                         </Button>
                         <Title style={styles.tabHeaderTextStyle}>Now Playing</Title>
                     </Left>
+                    <Right/>
                 </Header>
                 <Segment style={styles.headerFooterStyle}>
                     <Button
