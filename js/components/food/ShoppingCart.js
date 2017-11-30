@@ -368,12 +368,12 @@ export default class ShoppingCart extends Component {
                                                     items: state.params.order,
                                                     cost: state.params.totalAmount,
                                                     extras: {
+                                                        email: this.state.email,
                                                         notes: this.state.notes,
                                                         numKetchup: this.state.numberKetchup,
                                                         numMustard: this.state.numberMustard,
                                                         numMayonnaise: this.state.numberMayonnaise
                                                     },
-                                                    email: this.state.email,
                                                     displayNo: 0
                                                 }
                                             });
