@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from "./styles";
-import {ActivityIndicator, View, AsyncStorage} from "react-native";
+import {ActivityIndicator, View, AsyncStorage, Platform} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import {
     Picker,
@@ -208,9 +208,14 @@ export default class ShoppingCart extends Component {
                 value = ""
             }
             this.setState({isLoading: false, email: value});
+            this.onEmailValueChange(value);
         } catch (error) {
             console.log(error);
         }
+    }
+
+    getButtonOrTextColor() {
+        return (this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid && this.state.emailValidation.valid) ? this.successColor : this.errorColor
     }
 
     render() {
@@ -237,13 +242,6 @@ export default class ShoppingCart extends Component {
                             </Button>
                             <Title style={styles.tabHeaderTextStyle}>Your Order</Title>
                         </Left>
-                        <Right>
-                            <Button
-                                transparent
-                                onPress={() => this.props.navigation.navigate("Settings")}>
-                                <Icon name="settings" style={{color: 'white'}} size={25}/>
-                            </Button>
-                        </Right>
                     </Header>
                     <Container>
                         <Content>
@@ -353,7 +351,7 @@ export default class ShoppingCart extends Component {
                     <Footer>
                         <FooterTab>
                             <Button block
-                                    backgroundColor={(this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid) ? this.successColor : this.errorColor}
+                                    backgroundColor={this.getButtonOrTextColor()}
                                     style={styles.checkout}
                                     onPress={() => {
                                         if (this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid) {
@@ -380,10 +378,16 @@ export default class ShoppingCart extends Component {
                                         }
                                     }}>
                                 <Body>
-                                <Text style={styles.checkoutText}>Checkout</Text>
+                                <Text style={{
+                                    fontSize: 20,
+                                    color: Platform.OS === 'ios' ? this.getButtonOrTextColor() : "#fff"
+                                }}>Checkout</Text>
                                 </Body>
                                 <Right>
-                                    <Text style={styles.checkoutText}>${state.params.totalAmount}</Text>
+                                    <Text style={{
+                                        fontSize: 20,
+                                        color: Platform.OS === 'ios' ? this.getButtonOrTextColor() : "#fff"
+                                    }}>${state.params.totalAmount}</Text>
                                 </Right>
                             </Button>
                         </FooterTab>
