@@ -1,6 +1,7 @@
 const React = require("react-native");
 
 const { StyleSheet } = React;
+import {Platform} from "react-native"
 
 export default {
   container: {
@@ -12,5 +13,7 @@ export default {
     },menuTextStyle: {
         flexDirection:'row',
         alignItems: 'center'
+    }, segmentStyle: {
+        backgroundColor: Platform.OS === "ios" ? '#FFF' : '#0681E6'
     }
 };

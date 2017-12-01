@@ -37,9 +37,17 @@ export default class NowPlayingScreen extends Component {
    async getMovies() {
        let response = await fetch('https://birdsong.mybluemix.net/get_movies');
        this.movies = await response.json();
+       this.movies.screenOne.movieOne.imgPath = this.replaceHttp(this.movies.screenOne.movieOne.imgPath);
+       this.movies.screenOne.movieTwo.imgPath = this.replaceHttp(this.movies.screenOne.movieTwo.imgPath);
+       this.movies.screenTwo.movieOne.imgPath = this.replaceHttp(this.movies.screenTwo.movieOne.imgPath);
+       this.movies.screenTwo.movieTwo.imgPath = this.replaceHttp(this.movies.screenTwo.movieTwo.imgPath);
        this.setState({isLoading: false, earlyMovie: this.movies.screenOne.movieOne, laterMovie: this.movies.screenOne.movieTwo})
     }
 
+
+    replaceHttp(value: string) {
+        return value.replace("http", "https");
+    }
 
 
     render() {
@@ -64,7 +72,7 @@ export default class NowPlayingScreen extends Component {
                     </Left>
                     <Right/>
                 </Header>
-                <Segment style={styles.headerFooterStyle}>
+                <Segment style={styles.segmentStyle}>
                     <Button
                         first
                         active={this.state.screen === 1}
