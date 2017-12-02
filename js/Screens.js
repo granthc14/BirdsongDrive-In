@@ -7,7 +7,6 @@ import FoodScreen from "./components/food/FoodScreen";
 import MapScreen from "./components/map/MapScreen";
 import ShoppingCart from "./components/food/ShoppingCart";
 import CreditCardScreen from "./components/food/CheckoutScreen";
-import SettingsScreen from "./components/settings/SettingsScreen";
 
 const Screens = DrawerNavigator(
   {
@@ -15,8 +14,7 @@ const Screens = DrawerNavigator(
     Food: { screen: FoodScreen },
     Map: { screen: MapScreen },
     ShoppingCart: {screen: ShoppingCart},
-    CheckoutScreen: {screen: CreditCardScreen},
-    Settings: {screen: SettingsScreen}
+    CheckoutScreen: {screen: CreditCardScreen}
   },
   {
     initialRouteName: "Food",
