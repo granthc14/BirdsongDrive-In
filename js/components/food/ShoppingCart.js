@@ -208,6 +208,7 @@ export default class ShoppingCart extends Component {
                 value = ""
             }
             this.setState({isLoading: false, email: value});
+            this.onEmailValueChange(value);
         } catch (error) {
             console.log(error);
         }
