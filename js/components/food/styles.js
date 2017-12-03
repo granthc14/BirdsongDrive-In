@@ -27,6 +27,7 @@ export default {
         color: "black",
     },
     selectPaymentText: {
+      marginLeft: 20,
       fontSize: 20
     },
     numberTextStyle: {

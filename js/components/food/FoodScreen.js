@@ -57,10 +57,23 @@ export default class FoodScreen extends Component {
             },
             order: [],
             totalAmount: 0,
+            totalAmountWithDiscount: 0,
             shoppingCartColor: 'white',
             foodSelected: true,
             drinkSelected: false,
-            popcornSelected: false
+            popcornSelected: false,
+            combos: [
+                {
+                    name: "1 Large Popcorn and 2 Large Drinks",
+                    items: [
+                        {name: "Large Popcorn", price: 5.00, amount: 1},
+                        {name: "Large Drink", price: 4.00, amount: 2},
+                    ],
+                    totalItems: 3,
+                    itemCount: 3,
+                    discount: -1
+                }
+            ]
         };
         this.addPreviousOrder();
         this.totalHandler = this.addTotal.bind(this);
@@ -74,6 +87,7 @@ export default class FoodScreen extends Component {
             if (this.props.navigation.state.params !== undefined) {
                 if (this.props.navigation.state.params.order !== undefined) {
                     this.state.totalAmount = this.props.navigation.state.params.totalAmount;
+                    this.state.totalAmountWithDiscount = this.props.navigation.state.params.totalAmountWithDiscount;
                     this.state.order = this.props.navigation.state.params.order;
                     let color = this.emptyCartColor;
 
@@ -81,6 +95,9 @@ export default class FoodScreen extends Component {
                         color = this.fullCartColor;
                     }
                     this.state.shoppingCartColor = color;
+                    this.state.order = this.props.navigation.state.params.order.filter(function (item) {
+                        return item.itemTotal > 0;
+                    });
                     this.updateItems(this.state.food);
                     this.updateItems(this.state.drink);
                     this.updateItems(this.state.popcorn);
@@ -92,7 +109,7 @@ export default class FoodScreen extends Component {
     updateItems(items) {
         for (item of this.state.order) {
             for (foodItem in items) {
-                if (item.name === items[foodItem].name || (item.name.split(" ")[0] === items[foodItem].name.split(" ")[0] && items[foodItem].name.split(" ")[1] === "Drink")) {
+                if (item.name === items[foodItem].name || (item.name.split(" ")[0] === items[foodItem].name.split(" ")[0] && items[foodItem].name.split(" ")[1] === "Drink") && this.checkIfDrink(item)) {
                     if (items[foodItem].hasCondiments || items[foodItem].hasFlavors) {
                         items[foodItem].amount += item.amount;
                         items[foodItem].itemsWithCondiments.push(item);
@@ -142,6 +159,43 @@ export default class FoodScreen extends Component {
             this.setState({foodSelected: false, drinkSelected: true, popcornSelected: false})
         } else {
             this.setState({foodSelected: false, drinkSelected: false, popcornSelected: true})
+        }
+    }
+
+    checkIfDrink(item) {
+        return item.name.split(" ").indexOf("Popcorn") === -1 && item.name.split(" ").indexOf("Nachos") === -1 && item.name.split(" ").indexOf("Candy") === -1
+
+    }
+    calculateCombos() {
+        let combos = this.state.combos;
+        let items = this.state.order;
+        this.state.totalAmountWithDiscount = this.state.totalAmount;
+        for (combo of combos) {
+            for (comboItem of combo.items) {
+                for (item of items) {
+                    if (item.name === comboItem.name) {
+                        combo.totalItems -= item.amount;
+                    }else if (comboItem.name.split(" ").indexOf("Drink") !== -1 && this.checkIfDrink(item)) {
+                        if (item.name.split(" ")[0] === comboItem.name.split(" ")[0]) {
+                            combo.totalItems -= item.amount;
+                        }
+                    }
+                }
+            }
+            if (combo.totalItems <= 0) {
+                let discount = {
+                    name: combo.name,
+                    price: combo.discount,
+                    amount: 1,
+                    itemTotal: combo.discount,
+                    condiments: []
+                };
+                while(combo.totalItems <= 0) {
+                    this.state.order.push(discount);
+                    this.state.totalAmountWithDiscount += combo.discount;
+                    combo.totalItems += combo.itemCount;
+                }
+            }
         }
     }
 
@@ -205,7 +259,8 @@ export default class FoodScreen extends Component {
                         {
                             if (this.state.totalAmount > 0)
                             {
-                                navigate("ShoppingCart", {order: this.state.order, totalAmount: this.state.totalAmount})
+                                this.calculateCombos();
+                                navigate("ShoppingCart", {order: this.state.order, totalAmount: this.state.totalAmount, totalAmountWithDiscount: this.state.totalAmountWithDiscount})
                             }
                         }
                         }>

@@ -38,6 +38,20 @@ const datas = [
 		bg: "#DA4437",
 	},
 ];
+
+const combos = [
+    {
+        name: "1 Large Popcorn and 2 Large Drinks",
+        items: [
+            {name: "Large Popcorn", price: 5.00, amount: 0},
+            {name: "Large Drink", price: 4.00, amount: 0},
+            {name: "Large Drink", price: 4.00, amount: 0}
+        ],
+        itemTotal: 13,
+        discount: 1,
+        total: 12
+    }
+];
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
@@ -65,6 +79,22 @@ class SideBar extends Component {
 							</ListItem>}
 					/>
 				</Content>
+                <Content>
+				    <Text style={{marginLeft: 20}}>Combos:</Text>
+                    <List
+                        dataArray={combos}
+                        renderRow={data =>
+                            <ListItem>
+                                <Left>
+                                    <Text>{data.name}</Text>
+                                </Left>
+                                <Right>
+                                    <Text>{data.total}</Text>
+                                </Right>
+                            </ListItem>
+                        }
+                        />
+                </Content>
 			</Container>
 		);
 	}

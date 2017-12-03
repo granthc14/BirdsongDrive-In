@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from "./styles";
 import {ActivityIndicator, View, AsyncStorage, Platform} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import SideBar from "../sidebar/index.js"
 import {
     Picker,
     Container,
@@ -218,6 +219,7 @@ export default class ShoppingCart extends Component {
         return (this.state.makeValidation.valid && this.state.colorValidation.valid && this.state.modelValidation.valid && this.state.emailValidation.valid) ? this.successColor : this.errorColor
     }
 
+
     render() {
 
         const {state} = this.props.navigation;
@@ -236,12 +238,14 @@ export default class ShoppingCart extends Component {
                         <Left style={styles.menuTextStyle}>
                             <Button transparent onPress={() => navigate("Food", {
                                 order: state.params.order,
-                                totalAmount: state.params.totalAmount
+                                totalAmount: state.params.totalAmount,
+                                totalAmountWithDiscount: state.params.totalAmountWithDiscount
                             })}>
                                 <Icon name="arrow-left" size={25} style={{color: 'white'}}/>
                             </Button>
                             <Title style={styles.tabHeaderTextStyle}>Your Order</Title>
                         </Left>
+                        <Right/>
                     </Header>
                     <Container>
                         <Content>
@@ -387,7 +391,7 @@ export default class ShoppingCart extends Component {
                                     <Text style={{
                                         fontSize: 20,
                                         color: Platform.OS === 'ios' ? this.getButtonOrTextColor() : "#fff"
-                                    }}>${state.params.totalAmount}</Text>
+                                    }}>${state.params.totalAmountWithDiscount}</Text>
                                 </Right>
                             </Button>
                         </FooterTab>
