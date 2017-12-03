@@ -254,7 +254,7 @@ export default class ShoppingCart extends Component {
                                             <Text>{orderItem.name}</Text>
                                         </Left>
                                         <Body>
-                                        <Text> {orderItem.condiments.join(" ")}</Text>
+                                            <Text> {orderItem.condiments.join(" ")}</Text>
                                         </Body>
                                         <Right style={styles.itemTotal}>
                                             <Text>${orderItem.itemTotal}</Text>
