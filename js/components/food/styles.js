@@ -4,7 +4,7 @@ const { StyleSheet } = React;
 import { Platform } from 'react-native';
 export default {
   container: {
-    backgroundColor: "#fff"
+    backgroundColor: "#0681E6"
   },
     checkout: {
         flex: 1
@@ -57,10 +57,7 @@ export default {
         fontSize: 25,
         color: '#FFF'
     },tabStyle: {
-        backgroundColor:'#0681E6',
-        textStyle: {
-            fontColor: '#FFF'
-        }
+        backgroundColor:'#0681E6'
     }, tabHeaderTextStyle:{
       color:'#FFF'
     }, tabBarUnderlineStyle: {
