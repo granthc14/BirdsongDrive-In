@@ -233,7 +233,7 @@ export default class ShoppingCart extends Component {
         } else {
             return (
 
-                <Container style={styles.container}>
+                <Container style={styles.shoppingCartContainer}>
                     <Header style={styles.headerFooterStyle}>
                         <Left style={styles.menuTextStyle}>
                             <Button transparent onPress={() => navigate("Food", {

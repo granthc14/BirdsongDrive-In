@@ -6,6 +6,9 @@ export default {
   container: {
     backgroundColor: "#0681E6"
   },
+  shoppingCartContainer: {
+      backgroundColor: "#FFF"
+  },
     checkout: {
         flex: 1
     },
@@ -67,8 +70,10 @@ export default {
       flexDirection:'row',
         alignItems: 'center'
     }, tabIconActiveStyle: {
+      marginLeft: 8,
       color:'#FFF'
     }, tabIconNotActiveStyle: {
+        marginLeft: 8,
         color: Platform.OS === 'ios' ? '#033B6A' : ''
     }, plusMinusiOSStyle: {
       color:'#757575'

@@ -109,7 +109,7 @@ export default class FoodListItem extends Component {
     }
 
     render() {
-        if (this.props.item.hasCondiments) {
+        if (this.props.item.hasCondiments && this.props.item.type !== "drink") {
             return (
                 <ListItem>
                     <Left style={{flex: 2}}>
@@ -265,7 +265,8 @@ export default class FoodListItem extends Component {
                     </Right>
                 </ListItem>
             );
-        } else if (this.props.item.hasFlavors) {
+        }
+        else if (this.props.item.hasCondiments && this.props.item.type === "drink") {
             return (
                 <ListItem>
                     <Left style={{flex: 2}}>
@@ -465,7 +466,7 @@ export default class FoodListItem extends Component {
 
     AddDrink(drinks) {
         let newItem = {
-            name: this.state.item.size + " " + drinks,
+            name: this.state.item.name.split(" ")[0] + " " + drinks,
             price: this.state.item.price,
             amount: 1,
             condiments: []

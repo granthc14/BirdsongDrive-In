@@ -57,7 +57,10 @@ export default class CheckoutScreen extends Component {
                     {this.state.displayNumber}
                 </Text>
                 <KeepAwake />
-                <Button transparent onPress={() => this.props.navigation.goBack()}>
+                <Button transparent onPress={() => {
+                    delete this.props.navigation.params;
+                    this.props.navigation.goBack();
+                }}>
                     <Text>Go Back</Text>
                 </Button>
             </Container>
