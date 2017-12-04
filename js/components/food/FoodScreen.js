@@ -76,7 +76,7 @@ export default class FoodScreen extends Component {
         let combo = data.filter(function (item) {
             return item.type === "combo"
         });
-        this.setState({food: food, drink: drink, popcorn: popcorn, candy: candy, combos: combo});
+        this.setState({food: food, drink: drink, popcorn: popcorn, candy: candy});
         this.addPreviousOrder();
     }
     addPreviousOrder() {
